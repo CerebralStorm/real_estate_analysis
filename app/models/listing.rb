@@ -1,25 +1,44 @@
 class Listing < ActiveRecord::Base
-  before_save :set_price_per_sq_foot
-  before_save :set_price_for_even_cashflow
+  before_save :calculate_computed_fields
 
-  def loan_price
-    listing_price - down_payment
+  def calculate_computed_fields
+    set_zillow_fields # Do this first other fields may be dependent
+    set_loan_amount
+    set_price_per_sq_foot
+    set_thrity_year_cash_flow
+    set_fifteen_year_cash_flow
+  end
+
+  def set_loan_amount
+    self.loan_amount = listing_price - down_payment
   end
 
   def set_price_per_sq_foot
-    price_per_sq_foot = (listing_price/square_footage)
+    self.price_per_sq_foot = (listing_price/square_footage)
   end
 
-  def set_price_for_even_cashflow
-    avg_rent - total_monthly_costs
-    price_for_even_cashflow
+  def set_zillow_fields
+    Zillow.new(self).monthy_payment
   end
 
-  def total_monthly_costs
-    monthly_payment + monthly_tax_cost + insurance
+  def set_thrity_year_cash_flow
+    self.thirty_year_cash_flow = (avg_rent * confidence_rate) - total_thirty_year_monthly_costs
   end
 
-  def monthly_tax_cost
-    yearly_tax / 12
+  def set_fifteen_year_cash_flow
+    self.fifteen_year_cash_flow = (avg_rent * confidence_rate) - total_fifteen_year_monthly_costs
   end
+
+  def total_thirty_year_monthly_costs
+    total = thirty_year_fixed.to_i + monthly_property_taxes.to_i  + monthly_hazard_insurance.to_i
+    total += monthly_mortagage_insurance.to_i if pmi_required?
+    total
+  end
+
+  def total_fifteen_year_monthly_costs
+    total = fifteen_year_fixed.to_i + monthly_property_taxes.to_i  + monthly_hazard_insurance.to_i
+    total += monthly_mortagage_insurance.to_i  if pmi_required?
+    total
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610020521) do
+ActiveRecord::Schema.define(version: 20140610013147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,16 +19,27 @@ ActiveRecord::Schema.define(version: 20140610020521) do
   create_table "listings", force: true do |t|
     t.string   "mls_number"
     t.string   "address"
-    t.float    "listing_price"
-    t.float    "avg_rent"
-    t.float    "monthly_payment"
-    t.float    "yearly_tax"
-    t.float    "insurance"
+    t.integer  "listing_price"
+    t.integer  "down_payment",                     default: 0
+    t.integer  "loan_amount"
+    t.integer  "avg_rent"
+    t.integer  "thirty_year_fixed"
+    t.float    "thirty_year_fixed_interest_rate"
+    t.integer  "fifteen_year_fixed"
+    t.float    "fifteen_year_fixed_interest_rate"
+    t.integer  "monthly_mortagage_insurance"
+    t.integer  "monthly_property_taxes"
+    t.integer  "monthly_hazard_insurance"
     t.integer  "square_footage"
+    t.integer  "price_per_sq_foot",                default: 0
+    t.integer  "price_for_even_cashflow",          default: 0
+    t.string   "zip_code"
+    t.integer  "thirty_year_cash_flow"
+    t.integer  "fifteen_year_cash_flow"
+    t.float    "confidence_rate",                  default: 0.5
+    t.boolean  "pmi_required",                     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "price_per_sq_foot",       default: 0.0
-    t.float    "price_for_even_cashflow", default: 0.0
   end
 
 end

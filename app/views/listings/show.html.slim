@@ -12,14 +12,17 @@ p
   strong Avg rent:
   = @listing.avg_rent
 p
-  strong Monthly payment:
-  = @listing.monthly_payment
+  strong 30 Year Monthly payment:
+  = @listing.thirty_year_fixed
 p
-  strong Yearly tax:
-  = @listing.yearly_tax
+  strong 30 Year Rate:
+  = @listing.thirty_year_fixed_interest_rate
 p
-  strong Insurance:
-  = @listing.insurance
+  strong 15 Year Monthly payment:
+  = @listing.fifteen_year_fixed
+p
+  strong 15 Year Rate:
+  = @listing.fifteen_year_fixed_interest_rate
 p
   strong Square footage:
   = @listing.square_footage

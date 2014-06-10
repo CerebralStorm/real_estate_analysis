@@ -16,28 +16,32 @@
     br
       = f.text_field :address, class: 'form-control'
   .form-group
+    = f.label :zip_code, class: 'form-label'
+    br
+      = f.text_field :zip_code, class: 'form-control'
+  .form-group
     = f.label :listing_price, class: 'form-label'
     br
       = f.text_field :listing_price, class: 'form-control'
+  .form-group
+    = f.label :down_payment, class: 'form-label'
+    br
+      = f.text_field :down_payment, class: 'form-control'
   .form-group
     = f.label :avg_rent, class: 'form-label'
     br
       = f.text_field :avg_rent, class: 'form-control'
   .form-group
-    = f.label :monthly_payment, class: 'form-label'
+    = f.label :pmi_required, class: 'form-label'
     br
-      = f.text_field :monthly_payment, class: 'form-control'
-  .form-group
-    = f.label :yearly_tax, class: 'form-label'
-    br
-      = f.text_field :yearly_tax, class: 'form-control'
-  .form-group
-    = f.label :insurance, class: 'form-label'
-    br
-      = f.text_field :insurance, class: 'form-control'
+      = f.check_box :pmi_required
   .form-group
     = f.label :square_footage, class: 'form-label'
     br
       = f.number_field :square_footage, class: 'form-control'
+  .form-group
+    = f.label :confidence_rate, class: 'form-label'
+    br
+      = f.number_field :confidence_rate, class: 'form-control'
   .actions
     = f.submit "Submit", class: "btn"

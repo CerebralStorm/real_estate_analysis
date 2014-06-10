@@ -1,17 +1,12 @@
 h1 Listings
-table.table
+table.table.table-striped
   thead
     tr
       th Mls number
       th Address
       th Listing price
+      th Loan Amount
       th Avg rent
-      th Monthly payment
-      th Yearly tax
-      th Insurance
-      th Square footage
-      th
-      th
       th
   tbody
     - @listings.each do |listing|
@@ -19,13 +14,31 @@ table.table
         td= listing.mls_number
         td= listing.address
         td= listing.listing_price
+        td= listing.loan_amount
         td= listing.avg_rent
-        td= listing.monthly_payment
-        td= listing.yearly_tax
-        td= listing.insurance
-        td= listing.square_footage
-        td= link_to 'Show', listing
-        td= link_to 'Edit', edit_listing_path(listing)
-        td= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
+        td
+          p= link_to 'Show', listing
+          p= link_to 'Edit', edit_listing_path(listing)
+          p= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
+      tr
+        td
+          strong 30 Year Total Monthly Cost
+          p= listing.total_thirty_year_monthly_costs
+        td
+          strong 30 Year Monthly Cash Flow
+          p= listing.thirty_year_cash_flow
+        td
+          strong 15 Year Total Monthly Cost
+          p= listing.total_fifteen_year_monthly_costs
+        td
+          strong 15 Year Monthly Cash Flow
+          p= listing.fifteen_year_cash_flow
+        td
+          strong Total Square Footage
+          p= listing.square_footage
+        td
+          strong Price Per Square Foot
+          p= listing.price_per_sq_foot
+
 br
   = link_to 'New Listing', new_listing_path
