@@ -1,0 +1,31 @@
+h1 Listings
+table.table
+  thead
+    tr
+      th Mls number
+      th Address
+      th Listing price
+      th Avg rent
+      th Monthly payment
+      th Yearly tax
+      th Insurance
+      th Square footage
+      th
+      th
+      th
+  tbody
+    - @listings.each do |listing|
+      tr
+        td= listing.mls_number
+        td= listing.address
+        td= listing.listing_price
+        td= listing.avg_rent
+        td= listing.monthly_payment
+        td= listing.yearly_tax
+        td= listing.insurance
+        td= listing.square_footage
+        td= link_to 'Show', listing
+        td= link_to 'Edit', edit_listing_path(listing)
+        td= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
+br
+  = link_to 'New Listing', new_listing_path

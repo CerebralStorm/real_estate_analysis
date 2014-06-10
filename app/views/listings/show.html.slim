@@ -1,0 +1,28 @@
+p#notice= notice
+p
+  strong Mls number:
+  = @listing.mls_number
+p
+  strong Address:
+  = @listing.address
+p
+  strong Listing price:
+  = @listing.listing_price
+p
+  strong Avg rent:
+  = @listing.avg_rent
+p
+  strong Monthly payment:
+  = @listing.monthly_payment
+p
+  strong Yearly tax:
+  = @listing.yearly_tax
+p
+  strong Insurance:
+  = @listing.insurance
+p
+  strong Square footage:
+  = @listing.square_footage
+= link_to 'Edit', edit_listing_path(@listing)
+= link_to 'Back', listings_path
+

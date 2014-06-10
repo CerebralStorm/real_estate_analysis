@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610013147) do
+ActiveRecord::Schema.define(version: 20140610020521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,13 @@ ActiveRecord::Schema.define(version: 20140610013147) do
     t.float    "listing_price"
     t.float    "avg_rent"
     t.float    "monthly_payment"
-    t.float    "yearly_taxe"
+    t.float    "yearly_tax"
     t.float    "insurance"
     t.integer  "square_footage"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "price_per_sq_foot",       default: 0.0
+    t.float    "price_for_even_cashflow", default: 0.0
   end
 
 end

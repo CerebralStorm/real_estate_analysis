@@ -6,7 +6,7 @@ class CreateListings < ActiveRecord::Migration
       t.float :listing_price
       t.float :avg_rent
       t.float :monthly_payment
-      t.float :yearly_taxe
+      t.float :yearly_tax
       t.float :insurance
       t.integer :square_footage
 
