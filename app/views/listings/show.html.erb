@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Mls number:</strong>
+  <%= @listing.mls_number %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @listing.address %>
+</p>
+
+<p>
+  <strong>Listing price:</strong>
+  <%= @listing.listing_price %>
+</p>
+
+<p>
+  <strong>Avg rent:</strong>
+  <%= @listing.avg_rent %>
+</p>
+
+<p>
+  <strong>Monthly payment:</strong>
+  <%= @listing.monthly_payment %>
+</p>
+
+<p>
+  <strong>Yearly taxe:</strong>
+  <%= @listing.yearly_taxe %>
+</p>
+
+<p>
+  <strong>Insurance:</strong>
+  <%= @listing.insurance %>
+</p>
+
+<p>
+  <strong>Square footage:</strong>
+  <%= @listing.square_footage %>
+</p>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

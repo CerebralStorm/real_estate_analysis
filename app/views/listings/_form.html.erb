@@ -1,0 +1,49 @@
+<%= form_for(@listing) do |f| %>
+  <% if @listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@listing.errors.count, "error") %> prohibited this listing from being saved:</h2>
+
+      <ul>
+      <% @listing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :mls_number %><br>
+    <%= f.text_field :mls_number %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br>
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :listing_price %><br>
+    <%= f.text_field :listing_price %>
+  </div>
+  <div class="field">
+    <%= f.label :avg_rent %><br>
+    <%= f.text_field :avg_rent %>
+  </div>
+  <div class="field">
+    <%= f.label :monthly_payment %><br>
+    <%= f.text_field :monthly_payment %>
+  </div>
+  <div class="field">
+    <%= f.label :yearly_taxe %><br>
+    <%= f.text_field :yearly_taxe %>
+  </div>
+  <div class="field">
+    <%= f.label :insurance %><br>
+    <%= f.text_field :insurance %>
+  </div>
+  <div class="field">
+    <%= f.label :square_footage %><br>
+    <%= f.number_field :square_footage %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
