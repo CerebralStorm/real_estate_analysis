@@ -5,7 +5,7 @@ class Zillow
   attr_accessor :action, :options
 
   def initialize
-    @options = { query: {'zws-id': "TODO"} }
+    #@options = { query: {'zws-id': "TODO"} }
   end
 
 end
