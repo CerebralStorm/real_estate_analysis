@@ -14,6 +14,8 @@ gem 'thin'
 gem 'slim'
 gem 'httparty'
 gem "ransack"
+gem "cancan"
+gem 'devise'
 
 group :test, :development do
   gem 'pry'

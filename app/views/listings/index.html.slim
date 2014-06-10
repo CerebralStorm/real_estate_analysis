@@ -55,15 +55,13 @@ table.table.table-striped.table-bordered
         td= listing.thirty_year_cash_flow
         td= listing.fifteen_year_cash_flow
         td
-          p= link_to 'Show', listing
-          p= link_to 'Edit', edit_listing_path(listing)
-          p= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
-
-
-
-
-
-
+          -if can? :read, Listing
+            p= link_to 'Show', listing
+          -if can? :update, Listing
+            p= link_to 'Edit', edit_listing_path(listing)
+          -if can? :destroy, Listing
+            p= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
 
 br
-  = link_to 'New Listing', new_listing_path
+  -if can? :create, Listing
+    = link_to 'New Listing', new_listing_path
