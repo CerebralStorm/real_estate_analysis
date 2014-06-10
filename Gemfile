@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'thin'
 gem 'slim'
 gem 'httparty'
+gem "ransack"
 
 group :test, :development do
   gem 'pry'

@@ -4,7 +4,8 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @listings = Listing.all
+    @q = Listing.search(params[:q])
+    @listings = @q.result(distinct: true)
   end
 
   # GET /listings/1

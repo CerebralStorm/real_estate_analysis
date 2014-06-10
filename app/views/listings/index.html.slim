@@ -1,12 +1,47 @@
 h1 Listings
-table.table.table-striped
+= search_form_for @q, html: {class: 'form-horizontal'} do |f|
+  .row
+    .col-md-3
+      .form-group
+        = f.label :mls_number_cont, class: "form-label"
+        = f.search_field :mls_number_cont, class: "form-control"
+      .form-group
+        = f.label :address_cont, class: "form-label"
+        = f.search_field :address_cont, class: "form-control"
+    .col-md-3
+      .form-group
+        = f.label :listing_price_gteq, class: "form-label"
+        = f.text_field :listing_price_gteq, class: "form-control"
+      .form-group
+        = f.label :listing_price_lteq, class: "form-label"
+        = f.text_field :listing_price_lteq, class: "form-control"
+    .col-md-3
+      .form-group
+        = f.label :avg_rent_gteq, class: "form-label"
+        = f.text_field :avg_rent_gteq, class: "form-control"
+      .form-group
+        = f.label :avg_rent_lteq, class: "form-label"
+        = f.text_field :avg_rent_lteq, class: "form-control"
+    .col-md-3
+      .form-group
+        = f.label :square_footage_gteq, class: "form-label"
+        = f.text_field :square_footage_gteq, class: "form-control"
+      .form-group
+        = f.label :square_footage_lteq, class: "form-label"
+        = f.text_field :square_footage_lteq, class: "form-control"
+  = f.submit "Search", class: "btn"
+
+table.table.table-striped.table-bordered
   thead
     tr
-      th Mls number
-      th Address
-      th Listing price
-      th Loan Amount
-      th Avg rent
+      = content_tag :th, sort_link(@q, :mls_number, 'MLS Number', default_order: :desc)
+      = content_tag :th, sort_link(@q, :address, default_order: :desc)
+      = content_tag :th, sort_link(@q, :listing_price, default_order: :desc)
+      = content_tag :th, sort_link(@q, :avg_rent, default_order: :desc)
+      = content_tag :th, sort_link(@q, :square_footage, default_order: :desc)
+      = content_tag :th, sort_link(@q, :price_per_sq_foot, default_order: :desc)
+      = content_tag :th, sort_link(@q, :thirty_year_cash_flow, "30 Year Cash Flow", default_order: :desc)
+      = content_tag :th, sort_link(@q, :fifteen_year_cash_flow, "15 Year Cash Flow", default_order: :desc)
       th
   tbody
     - @listings.each do |listing|
@@ -14,31 +49,21 @@ table.table.table-striped
         td= listing.mls_number
         td= listing.address
         td= listing.listing_price
-        td= listing.loan_amount
         td= listing.avg_rent
+        td= listing.square_footage
+        td= listing.price_per_sq_foot
+        td= listing.thirty_year_cash_flow
+        td= listing.fifteen_year_cash_flow
         td
           p= link_to 'Show', listing
           p= link_to 'Edit', edit_listing_path(listing)
           p= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
-      tr
-        td
-          strong 30 Year Total Monthly Cost
-          p= listing.total_thirty_year_monthly_costs
-        td
-          strong 30 Year Monthly Cash Flow
-          p= listing.thirty_year_cash_flow
-        td
-          strong 15 Year Total Monthly Cost
-          p= listing.total_fifteen_year_monthly_costs
-        td
-          strong 15 Year Monthly Cash Flow
-          p= listing.fifteen_year_cash_flow
-        td
-          strong Total Square Footage
-          p= listing.square_footage
-        td
-          strong Price Per Square Foot
-          p= listing.price_per_sq_foot
+
+
+
+
+
+
 
 br
   = link_to 'New Listing', new_listing_path
