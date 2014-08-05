@@ -47,7 +47,7 @@ table.table.table-striped.table-bordered
     - @listings.each do |listing|
       tr
         td= listing.mls_number
-        td= listing.address
+        td= listing.full_address
         td= listing.listing_price
         td= listing.avg_rent
         td= listing.square_footage

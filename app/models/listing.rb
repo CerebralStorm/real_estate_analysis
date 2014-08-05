@@ -11,6 +11,10 @@ class Listing < ActiveRecord::Base
     set_fifteen_year_cash_flow
   end
 
+  def full_address
+    [address, city, state, zip_code].join(", ")
+  end
+
   def set_loan_amount
     self.loan_amount = listing_price - down_payment
   end
