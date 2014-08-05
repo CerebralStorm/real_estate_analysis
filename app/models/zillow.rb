@@ -51,13 +51,14 @@ class Zillow
   def search_result
     response = self.class.get("/GetSearchResults.htm", search_result_options)
     if response.code == 200
-      result = response['searchresults']['response']['results'].first[1]
-      rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i
-      adjust_rent = rent * 0.2
-      listing.avg_rent = rent - adjust_rent
-      listing.zpid = result['zpid']
-      listing.city = result['address']['city']
-      listing.state = result['address']['state']
+      begin
+        result = response['searchresults']['response']['results'].first[1]
+        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i
+        listing.zpid = result['zpid']
+        listing.city = result['address']['city']
+        listing.state = result['address']['state']
+      rescue
+      end
     end
   end
 
