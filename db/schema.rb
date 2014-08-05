@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610060903) do
+ActiveRecord::Schema.define(version: 20140805001917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,14 @@ ActiveRecord::Schema.define(version: 20140610060903) do
     t.boolean  "pmi_required",                     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "city"
+    t.string   "state"
+    t.float    "remodel_cost"
+    t.integer  "number_of_bedrooms"
+    t.integer  "potential_number_of_bedrooms"
+    t.integer  "number_of_bathrooms"
+    t.integer  "potential_number_of_bathrooms"
+    t.string   "zpid"
   end
 
   create_table "users", force: true do |t|

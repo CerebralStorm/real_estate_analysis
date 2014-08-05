@@ -2,11 +2,17 @@ class Zillow
   include HTTParty
   base_uri "http://www.zillow.com/webservice/"
 
-  attr_accessor :action, :options, :listing
+  attr_accessor :action, :listing
 
   def initialize(listing)
     @listing = listing
-    @options = {
+    monthy_payment
+    search_result
+    #comp
+  end
+
+  def monthly_payment_options
+    {
       query: {
         'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
         price: listing.listing_price,
@@ -18,7 +24,7 @@ class Zillow
   end
 
   def monthy_payment
-    response = self.class.get("/GetMonthlyPayments.htm", @options)
+    response = self.class.get("/GetMonthlyPayments.htm", monthly_payment_options)
     if response.code == 200
       response_hash = response['response']
       listing.thirty_year_fixed = response_hash['thirtyYearFixed']['monthlyPrincipalAndInterest']
@@ -29,5 +35,49 @@ class Zillow
       listing.monthly_hazard_insurance = response_hash['monthlyHazardInsurance']
     end
   end
+
+  def search_result_options
+    {
+      query: {
+        'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
+        address: listing.address,
+        citystatezip: listing.zip_code,
+        rentzestimate: true,
+        output: 'json'
+      }
+    }
+  end
+
+  def search_result
+    response = self.class.get("/GetSearchResults.htm", search_result_options)
+    if response.code == 200
+      result = response['searchresults']['response']['results'].first[1]
+      rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i
+      adjust_rent = rent * 0.2
+      listing.avg_rent = rent - adjust_rent
+      listing.zpid = result['zpid']
+      listing.city = result['address']['city']
+      listing.state = result['address']['state']
+    end
+  end
+
+  # def comp_options
+  #   {
+  #     query: {
+  #       'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
+  #       zpid: listing.zpid,
+  #       count: 10,
+  #       rentzestimate: true,
+  #       output: 'json'
+  #     }
+  #   }
+  # end
+
+  # def comp
+  #   response = self.class.get("/GetComps.htm", comp_options)
+  #   if response.code == 200
+  #     binding.pry
+  #   end
+  # end
 
 end

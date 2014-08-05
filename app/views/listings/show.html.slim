@@ -26,6 +26,22 @@ p
 p
   strong Square footage:
   = @listing.square_footage
+p
+  strong City:
+  = @listing.city
+p
+  strong State:
+  = @listing.state
+p
+  strong Remodel Cost:
+  = @listing.remodel_cost
+p
+  strong Number of Bedrooms:
+  = @listing.number_of_bedrooms
+p
+  strong Potential Number Of Bedrooms:
+  = @listing.potential_number_of_bedrooms
+br
 = link_to 'Edit', edit_listing_path(@listing)
 = link_to 'Back', listings_path
 

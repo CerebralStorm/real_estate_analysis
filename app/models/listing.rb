@@ -20,7 +20,7 @@ class Listing < ActiveRecord::Base
   end
 
   def set_zillow_fields
-    Zillow.new(self).monthy_payment
+    Zillow.new(self)
   end
 
   def set_thrity_year_cash_flow
