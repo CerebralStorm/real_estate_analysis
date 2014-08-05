@@ -52,7 +52,11 @@ class Zillow
     response = self.class.get("/GetSearchResults.htm", search_result_options)
     if response.code == 200
       begin
-        result = response['searchresults']['response']['results'].first[1]
+        result = response['searchresults'] if response.has_key?('searchresults')
+        result = result['response'] if result.has_key?('response')
+        result = result['results'] if result.has_key?('results')
+        result = result['result'] if result.has_key?('result')
+        result = result[0] if result.count > 0
         listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i
         listing.zpid = result['zpid']
         listing.city = result['address']['city']
