@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140805001917) do
+ActiveRecord::Schema.define(version: 20160727024359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "listings", force: true do |t|
+  create_table "listings", force: :cascade do |t|
     t.string   "mls_number"
     t.string   "address"
     t.integer  "listing_price"
@@ -50,7 +49,31 @@ ActiveRecord::Schema.define(version: 20140805001917) do
     t.string   "zpid"
   end
 
-  create_table "users", force: true do |t|
+  create_table "rental_calculations", force: :cascade do |t|
+    t.integer  "listing_id"
+    t.float    "purchase_price"
+    t.float    "after_repair_value"
+    t.float    "closing_cost"
+    t.float    "repair_cost"
+    t.float    "interest_rate"
+    t.float    "other_lender_charges"
+    t.float    "lender_points"
+    t.integer  "down_payment"
+    t.integer  "loan_amount"
+    t.integer  "loan_duration"
+    t.integer  "vacancy"
+    t.integer  "repairs"
+    t.integer  "capital_expenditures"
+    t.integer  "property_management"
+    t.integer  "annual_income_growth"
+    t.integer  "appreciation"
+    t.integer  "annual_expense_growth"
+    t.integer  "sales_expense"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -64,9 +87,8 @@ ActiveRecord::Schema.define(version: 20140805001917) do
     t.text     "roles"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

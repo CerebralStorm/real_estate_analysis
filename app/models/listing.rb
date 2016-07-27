@@ -1,8 +1,8 @@
 class Listing < ActiveRecord::Base
   before_save :calculate_computed_fields
 
-  validate :mls_number, unique: true, presence: true
-
+  validates :mls_number, uniqueness: true, presence: true
+  #add property_taxes
   def calculate_computed_fields
     set_zillow_fields # Do this first other fields may be dependent
     set_loan_amount
