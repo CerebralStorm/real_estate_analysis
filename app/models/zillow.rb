@@ -6,6 +6,9 @@ class Zillow
 
   def initialize(listing)
     @listing = listing
+  end
+
+  def run
     monthy_payment
     search_result
     #comp
@@ -55,11 +58,12 @@ class Zillow
         results = response['searchresults']['response']['results']
         results = results.has_key?('result') ? results['result'] : results
         result = results.kind_of?(Array) ? results[0] : results
-        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i
+        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i rescue nil
         listing.zpid = result['zpid']
         listing.city = result['address']['city']
         listing.state = result['address']['state']
-      rescue
+      rescue => e
+        binding.pry
       end
     end
   end

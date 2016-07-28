@@ -16,6 +16,9 @@ gem 'httparty'
 gem "ransack"
 gem "cancancan"
 gem 'devise'
+gem 'nokogiri'
+gem 'capybara'
+gem 'poltergeist'
 
 group :test, :development do
   gem 'pry'

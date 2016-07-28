@@ -4,8 +4,8 @@ class Listing < ActiveRecord::Base
   validates :mls_number, uniqueness: true, presence: true
   #add property_taxes
   def calculate_computed_fields
-    set_zillow_fields # Do this first other fields may be dependent
     set_loan_amount
+    set_zillow_fields # Do this first other fields may be dependent
     set_price_per_sq_foot
     set_thrity_year_cash_flow
     set_fifteen_year_cash_flow
@@ -16,22 +16,26 @@ class Listing < ActiveRecord::Base
   end
 
   def set_loan_amount
+    self.down_payment ||= (listing_price.to_f * 0.2).to_i
     self.loan_amount = listing_price - down_payment
   end
 
   def set_price_per_sq_foot
+    return unless listing_price.present? and square_footage.present?
     self.price_per_sq_foot = (listing_price/square_footage)
   end
 
   def set_zillow_fields
-    Zillow.new(self)
+    Zillow.new(self).run
   end
 
   def set_thrity_year_cash_flow
+    return unless avg_rent.present?
     self.thirty_year_cash_flow = (avg_rent * confidence_rate) - total_thirty_year_monthly_costs
   end
 
   def set_fifteen_year_cash_flow
+    return unless avg_rent.present?
     self.fifteen_year_cash_flow = (avg_rent * confidence_rate) - total_fifteen_year_monthly_costs
   end
 
