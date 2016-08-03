@@ -28,14 +28,18 @@ class Zillow
 
   def monthy_payment
     response = self.class.get("/GetMonthlyPayments.htm", monthly_payment_options)
-    if response.code == 200
-      response_hash = response['response']
-      listing.thirty_year_fixed = response_hash['thirtyYearFixed']['monthlyPrincipalAndInterest']
-      listing.thirty_year_fixed_interest_rate = response_hash['thirtyYearFixed']['rate']
-      listing.fifteen_year_fixed = response_hash['fifteenYearFixed']['monthlyPrincipalAndInterest']
-      listing.fifteen_year_fixed_interest_rate = response_hash['fifteenYearFixed']['rate']
-      listing.monthly_property_taxes = response_hash['monthlyPropertyTaxes']
-      listing.monthly_hazard_insurance = response_hash['monthlyHazardInsurance']
+    begin
+      if response.code == 200
+        response_hash = response['response']
+        listing.thirty_year_fixed = response_hash['thirtyYearFixed']['monthlyPrincipalAndInterest']
+        listing.thirty_year_fixed_interest_rate = response_hash['thirtyYearFixed']['rate']
+        listing.fifteen_year_fixed = response_hash['fifteenYearFixed']['monthlyPrincipalAndInterest']
+        listing.fifteen_year_fixed_interest_rate = response_hash['fifteenYearFixed']['rate']
+        listing.monthly_property_taxes = response_hash['monthlyPropertyTaxes']
+        listing.monthly_hazard_insurance = response_hash['monthlyHazardInsurance']
+      end
+    rescue => e
+      #noop
     end
   end
 
@@ -58,7 +62,7 @@ class Zillow
         results = response['searchresults']['response']['results']
         results = results.has_key?('result') ? results['result'] : results
         result = results.kind_of?(Array) ? results[0] : results
-        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i rescue nil
+        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i rescue listing.avg_rent
         listing.zpid = result['zpid']
         listing.city = result['address']['city']
         listing.state = result['address']['state']

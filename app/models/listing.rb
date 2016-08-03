@@ -1,7 +1,11 @@
 class Listing < ActiveRecord::Base
   before_save :calculate_computed_fields
 
+  belongs_to :zip_code
+
   validates :mls_number, uniqueness: true, presence: true
+
+  scope :visible, -> { where(hide: false) }
   #add property_taxes
   def calculate_computed_fields
     set_loan_amount

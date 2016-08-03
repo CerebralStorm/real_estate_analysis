@@ -1,11 +1,11 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /listings
   # GET /listings.json
   def index
-    @q = Listing.search(params[:q])
+    @q = Listing.visible.search(params[:q])
     @listings = @q.result(distinct: true)
   end
 
@@ -61,6 +61,11 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url }
       format.json { head :no_content }
     end
+  end
+
+  def toggle
+    @listing.update_attributes(hide: !@listing.hide)
+    redirect_to :back
   end
 
   private

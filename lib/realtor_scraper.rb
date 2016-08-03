@@ -5,7 +5,7 @@ require 'capybara/poltergeist'
 Capybara.default_driver = :poltergeist
 Capybara.run_server = false
 
-class Realtor
+class RealtorScraper
   include Capybara::DSL
   attr_accessor :zip_codes
 

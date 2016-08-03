@@ -41,7 +41,6 @@ table.table.table-striped.table-bordered
       = content_tag :th, sort_link(@q, :square_footage, default_order: :desc)
       = content_tag :th, sort_link(@q, :price_per_sq_foot, default_order: :desc)
       = content_tag :th, sort_link(@q, :thirty_year_cash_flow, "30 Year Cash Flow", default_order: :desc)
-      = content_tag :th, sort_link(@q, :fifteen_year_cash_flow, "15 Year Cash Flow", default_order: :desc)
       th
   tbody
     - @listings.each do |listing|
@@ -53,10 +52,10 @@ table.table.table-striped.table-bordered
         td= listing.square_footage
         td= listing.price_per_sq_foot
         td= listing.thirty_year_cash_flow
-        td= listing.fifteen_year_cash_flow
         td
+          p= link_to 'Hide', toggle_listing_path(listing)
           -if can? :read, Listing
-            p= link_to 'Show', listing
+            p= link_to 'View', listing
           -if can? :update, Listing
             p= link_to 'Edit', edit_listing_path(listing)
           -if can? :destroy, Listing
