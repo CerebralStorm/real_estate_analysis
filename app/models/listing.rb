@@ -6,13 +6,14 @@ class Listing < ActiveRecord::Base
   validates :mls_number, uniqueness: true, presence: true
 
   scope :visible, -> { where(hide: false) }
-  #add property_taxes
+
+  #TODO add property_taxes
   def calculate_computed_fields
     set_loan_amount
-    set_zillow_fields # Do this first other fields may be dependent
+    set_api_fields # Do this first other fields may be dependent
     set_price_per_sq_foot
     set_thrity_year_cash_flow
-    set_fifteen_year_cash_flow
+    #set_fifteen_year_cash_flow
   end
 
   def full_address
@@ -29,8 +30,9 @@ class Listing < ActiveRecord::Base
     self.price_per_sq_foot = (listing_price/square_footage)
   end
 
-  def set_zillow_fields
+  def set_api_fields
     Zillow.new(self).run
+    Trulia.new(self).run
   end
 
   def set_thrity_year_cash_flow

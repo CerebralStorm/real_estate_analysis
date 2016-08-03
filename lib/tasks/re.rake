@@ -5,7 +5,7 @@ namespace :re do
 
   desc "scrapes MLS listings"
   task scrape: :environment do
-    ZIP_CODES = [
+    zip_codes = [
       '84001',
       '84002',
       '84003',
@@ -355,24 +355,25 @@ namespace :re do
       '84791'
     ]
 
-    # zip_codes = [
-    #   '84103',
-    #   '84102',
-    #   '84105',
-    #   '84106',
-    #   '84108',
-    #   '84109',
-    #   '84124',
-    #   '84117',
-    #   '84121',
-    #   '84093',
-    #   '84092',
-    #   '84737',
-    #   '84780',
-    #   '84770'
-    # ]
+    zip_codes = [
+      '84106',
+      '84108',
+      '84109',
+      '84124',
+      '84117',
+      '84121',
+      '84093',
+      '84092',
+      '84737',
+      '84780',
+      '84770'
+    ]
 
-    TruliaScraper.new(ZIP_CODES).run
+    zip_codes = [
+      '84121'
+    ]
+
+    TruliaScraper.new(zip_codes).run
     #Realtor.new(zip_codes).run
   end
 end

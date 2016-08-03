@@ -26,7 +26,7 @@ class TruliaScraper
   def get_mls_number(page)
     begin
       page.css('li .listBulleted').select{ |li| li.text.include?('MLS/Source ID:') }.first.css('li').first.text.match(/\d+/).to_s
-    rescue
+    rescue => e
       page.css("span.headingDoubleSuper").text
     end
   end
@@ -34,7 +34,7 @@ class TruliaScraper
   def get_listing_price(page)
     begin
       page.css('li .listBulleted').select{ |li| li.text.include?('Price:') }.first.css('li').first.text.scan(/\d/).join('')
-    rescue
+    rescue => e
       #do nothing
     end
   end
@@ -64,7 +64,7 @@ class TruliaScraper
         address: page.css("span.headingDoubleSuper").text,
         listing_price: get_listing_price(page),
         square_footage: get_square_footage(page),
-        zip_code: get_zip_code(page),
+        zip_code: ZipCode.where(code: get_zip_code(page)).first_or_create,
       )
       listing.save!
     rescue => e

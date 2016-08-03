@@ -95,8 +95,10 @@ ActiveRecord::Schema.define(version: 20160803212952) do
 
   create_table "zip_codes", force: :cascade do |t|
     t.string   "code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "median_listing_price"
+    t.integer  "average_listing_price"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
 end

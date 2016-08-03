@@ -16,11 +16,11 @@ class Trulia
   end
 
   def zip_code_info
-    response = self.class.get("?library=TruliaStats&function=getZipCodeStats&zipCode=#{listing.zip_code}&startDate=#{start_date}&endDate=#{end_date}&apikey=#{api_key}")
+    return unless listing.zip_code.present?
+    response = self.class.get("?library=TruliaStats&function=getZipCodeStats&zipCode=#{listing.zip_code.code}&startDate=#{start_date}&endDate=#{end_date}&apikey=#{api_key}")
     begin
       if response.code == 200
-        zip_code = ZipCode.where(code: listing.zip_code).first_or_create
-        listing.zip_code_id = zip_code.id
+        zip_code = listing.zip_code
         response_hash = response['TruliaWebServices']['response']
         listing_stats_week = response_hash['TruliaStats']['listingStats']['listingStat'].last
         listing_stats_week['listingPrice']['subcategory'].first
@@ -33,6 +33,7 @@ class Trulia
 
       end
     rescue => e
+      binding.pry
       #noop
     end
   end
