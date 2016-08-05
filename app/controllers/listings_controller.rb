@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @q = Listing.visible.search(params[:q])
+    @q = Listing.visible.with_cashflow.search(params[:q])
     @listings = @q.result(distinct: true)
   end
 

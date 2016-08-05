@@ -17,10 +17,14 @@ class TruliaScraper
     end
   end
 
-  def get_zipcode_properties(zip_code)
-    page = Nokogiri::HTML(open("http://www.trulia.com/for_sale/#{zip_code}_zip/0-200000_price/MULTI-FAMILY,SINGLE-FAMILY_HOME,TOWNHOUSE_type/"))
+  def get_zipcode_properties(zip_code, page_number = 1)
+    page = Nokogiri::HTML(open("http://www.trulia.com/for_sale/#{zip_code}_zip/0-200000_price/MULTI-FAMILY,SINGLE-FAMILY_HOME,TOWNHOUSE_type/#{page_number}_p"))
     list = page.css('div#photoView')
-    page.css("a").select{|link| link['href'].to_s.include?('/property/') and !link['href'].to_s.include?('#map') }.map{ |link| link['href'].to_s }.uniq
+    results = page.css("a").select{|link| link['href'].to_s.include?('/property/') and !link['href'].to_s.include?('#map') }.map{ |link| link['href'].to_s }.uniq
+    if page.css("a").select{|link| link.text.strip == 'Next' }.present?
+      results += get_zipcode_properties(zip_code, page_number + 1)
+    end
+    results
   end
 
   def get_mls_number(page)
@@ -51,7 +55,7 @@ class TruliaScraper
     begin
       page.css('span .pls').select{ |span| span['itemprop'] == 'postalCode' }.first.text
     rescue => e
-      binding.pry
+      #binding.pry
     end
   end
 

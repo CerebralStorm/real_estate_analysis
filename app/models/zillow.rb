@@ -20,7 +20,7 @@ class Zillow
         'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
         price: listing.listing_price,
         dollarsdown: listing.down_payment,
-        zip: listing.zip_code,
+        zip: listing.zip,
         output: 'json'
       }
     }
@@ -48,7 +48,7 @@ class Zillow
       query: {
         'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
         address: listing.address,
-        citystatezip: listing.zip_code,
+        citystatezip: listing.zip,
         rentzestimate: true,
         output: 'json'
       }
@@ -56,6 +56,7 @@ class Zillow
   end
 
   def search_result
+    return if listing.avg_rent.present?
     response = self.class.get("/GetSearchResults.htm", search_result_options)
     if response.code == 200 && response['searchresults'].has_key?('response')
       begin
@@ -67,7 +68,7 @@ class Zillow
         listing.city = result['address']['city']
         listing.state = result['address']['state']
       rescue => e
-        binding.pry
+        #binding.pry
       end
     end
   end

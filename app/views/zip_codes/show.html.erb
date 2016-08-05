@@ -15,5 +15,48 @@
   <%= number_to_currency @zip_code.median_listing_price %>
 </p>
 
+<p>
+  <strong>Price to Rent Ratio:</strong>
+  <%= @zip_code.price_to_rent_ratio %>
+</p>
+
+<p>
+  <strong>Median Rent:</strong>
+  <%= number_to_currency @zip_code.median_rent %>
+</p>
+
+<p>
+  <strong>Estimated Rent:</strong>
+  <%= number_to_currency @zip_code.estimated_rent %>
+</p>
+
+<hr />
+<table class="table">
+  <thead>
+    <tr>
+      <td>MLS Number</td>
+      <td>Address</td>
+      <td>Listing Price</td>
+      <td>Rent</td>
+      <td>SQFT</td>
+      <td>Price/SQFT</td>
+      <td>30 Year Cashflow</td>
+      th
+    </tr>
+  </thead>
+  <tbody>
+    <% @zip_code.listings.each do |listing| %>
+      <tr>
+        <td><%= listing.mls_number %></td>
+        <td><%= listing.full_address %></td>
+        <td><%= number_to_currency listing.listing_price, precision: 0 %></td>
+        <td><%= number_to_currency listing.avg_rent %></td>
+        <td><%= listing.square_footage %></td>
+        <td><%= listing.price_per_sq_foot %></td>
+        <td><%= number_to_currency listing.thirty_year_cash_flow %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <%= link_to 'Edit', edit_zip_code_path(@zip_code) %> |
 <%= link_to 'Back', zip_codes_path %>

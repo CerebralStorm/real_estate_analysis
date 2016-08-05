@@ -6,6 +6,8 @@ class Listing < ActiveRecord::Base
   validates :mls_number, uniqueness: true, presence: true
 
   scope :visible, -> { where(hide: false) }
+  scope :with_cashflow, -> { where.not(avg_rent: nil) }
+  scope :below_average_price, -> { joins(:zip_code).where('listings.listing_price < zip_codes.average_listing_price') }
 
   #TODO add property_taxes
   def calculate_computed_fields
@@ -13,11 +15,15 @@ class Listing < ActiveRecord::Base
     set_api_fields # Do this first other fields may be dependent
     set_price_per_sq_foot
     set_thrity_year_cash_flow
-    #set_fifteen_year_cash_flow
+    set_fifteen_year_cash_flow
   end
 
   def full_address
-    [address, city, state, zip_code].join(", ")
+    [address, city, state, zip].compact.join(", ")
+  end
+
+  def zip
+    zip_code.code
   end
 
   def set_loan_amount

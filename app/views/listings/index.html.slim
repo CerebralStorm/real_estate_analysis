@@ -47,11 +47,18 @@ table.table.table-striped.table-bordered
       tr
         td= listing.mls_number
         td= listing.full_address
-        td= listing.listing_price
-        td= listing.avg_rent
+        td= number_to_currency listing.listing_price, precision: 0
+        td= number_to_currency listing.avg_rent
         td= listing.square_footage
         td= listing.price_per_sq_foot
-        td= listing.thirty_year_cash_flow
+        td= number_to_currency listing.thirty_year_cash_flow
+        td
+          p
+            |ALP:
+            = number_to_currency listing.zip_code.try(:average_listing_price), precision: 0
+          p
+            |MLP:
+            = number_to_currency listing.zip_code.try(:median_listing_price), precision: 0
         td
           p= link_to 'Hide', toggle_listing_path(listing)
           -if can? :read, Listing

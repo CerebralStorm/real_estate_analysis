@@ -2,10 +2,11 @@
 
 <h1>Zip Codes</h1>
 
-<table>
+<table class='table'>
   <thead>
     <tr>
       <th>Code</th>
+      <th>Number of Listings</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
     <% @zip_codes.each do |zip_code| %>
       <tr>
         <td><%= zip_code.code %></td>
+        <td><%= zip_code.listings.count %></td>
         <td><%= link_to 'Show', zip_code %></td>
         <td><%= link_to 'Edit', edit_zip_code_path(zip_code) %></td>
         <td><%= link_to 'Destroy', zip_code, method: :delete, data: { confirm: 'Are you sure?' } %></td>
