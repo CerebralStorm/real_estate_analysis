@@ -8,7 +8,7 @@ class Listing < ActiveRecord::Base
   scope :visible, -> { where(hide: false) }
   scope :with_cashflow, -> { where.not(avg_rent: nil) }
   scope :below_average_price, -> { joins(:zip_code).where('listings.listing_price < zip_codes.average_listing_price') }
-
+  scope :with_favorite_zipcode, -> { joins(:zip_code).merge(ZipCode.favorite) }
   #TODO add property_taxes
   def calculate_computed_fields
     set_loan_amount

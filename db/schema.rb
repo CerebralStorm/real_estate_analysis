@@ -97,11 +97,12 @@ ActiveRecord::Schema.define(version: 20160805122417) do
     t.string   "code"
     t.integer  "median_listing_price"
     t.integer  "average_listing_price"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.float    "price_to_rent_ratio"
     t.float    "median_rent"
     t.float    "estimated_rent"
+    t.boolean  "favorite",              default: false
   end
 
 end

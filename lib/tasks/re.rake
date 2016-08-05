@@ -36,22 +36,6 @@ namespace :re do
     '84784', '84790', '84791'
   ]
 
-  FAVORITE_ZIP_CODES = [
-    '84103',
-    '84102',
-    '84105',
-    '84106',
-    '84108',
-    '84109',
-    '84124',
-    '84117',
-    '84121',
-    '84093',
-    '84092',
-    '84767',
-    '84532'
-  ]
-
   desc "scrapes MLS listings"
   task scrape: :environment do
     TruliaScraper.new(zip_codes).run
@@ -60,7 +44,7 @@ namespace :re do
 
   desc "populates zipcode data"
   task zip: :environment do
-    FAVORITE_ZIP_CODES.each do |code|
+    ZipCode.favorite.each do |code|
       zip_code = ZipCode.where(code: code).first_or_create
       Quandl.new(zip_code).run
     end
