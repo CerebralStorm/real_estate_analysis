@@ -70,7 +70,7 @@ class TruliaScraper
         square_footage: get_square_footage(page),
         zip_code: ZipCode.where(code: get_zip_code(page)).first_or_create,
       )
-      listing.save!
+      listing.save if listing.changed?
     rescue => e
       puts "#{e} for #{property_link}"
     end

@@ -7,7 +7,9 @@
     <tr>
       <th>Code</th>
       <th>Number of Listings</th>
-      <th colspan="3"></th>
+      <th>Positive Cashflow Listings</th>
+      <th>Favorite?</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
@@ -16,6 +18,9 @@
       <tr>
         <td><%= zip_code.code %></td>
         <td><%= zip_code.listings.count %></td>
+        <td><%= zip_code.listings.positive_cashflow.count %></td>
+        <td><%= zip_code.favorite %></td>
+        <td><%= link_to 'Favorite', toggle_zip_code_path(zip_code) %></td>
         <td><%= link_to 'Show', zip_code %></td>
         <td><%= link_to 'Edit', edit_zip_code_path(zip_code) %></td>
         <td><%= link_to 'Destroy', zip_code, method: :delete, data: { confirm: 'Are you sure?' } %></td>

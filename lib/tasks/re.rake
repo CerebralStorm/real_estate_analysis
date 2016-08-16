@@ -38,8 +38,8 @@ namespace :re do
 
   desc "scrapes MLS listings"
   task scrape: :environment do
-    TruliaScraper.new(zip_codes).run
-    #Realtor.new(zip_codes).run
+    #TruliaScraper.new(ZIP_CODES).run
+    HudHomeStoreScraper.new.run
   end
 
   desc "populates zipcode data"

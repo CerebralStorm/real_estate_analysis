@@ -1,5 +1,7 @@
 RealEstateAnalysis::Application.routes.draw do
-  resources :zip_codes
+  resources :zip_codes do
+    get :toggle, on: :member
+  end
   resources :rental_calculations
   devise_for :users
   resources :listings do

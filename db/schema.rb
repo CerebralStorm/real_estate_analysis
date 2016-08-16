@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805122417) do
+ActiveRecord::Schema.define(version: 20160816031248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 20160805122417) do
     t.string   "zpid"
     t.boolean  "hide",                             default: false
     t.integer  "zip_code_id"
+    t.integer  "score"
+    t.boolean  "hud",                              default: false
   end
 
   create_table "rental_calculations", force: :cascade do |t|

@@ -1,10 +1,11 @@
 class ZipCodesController < ApplicationController
-  before_action :set_zip_code, only: [:show, :edit, :update, :destroy]
+  before_action :set_zip_code, only: [:show, :edit, :update, :destroy, :toggle]
 
   # GET /zip_codes
   # GET /zip_codes.json
   def index
-    @zip_codes = ZipCode.all
+    @q = ZipCode.search(params[:q])
+    @zip_codes = @q.result(distinct: true)
   end
 
   # GET /zip_codes/1
@@ -61,10 +62,17 @@ class ZipCodesController < ApplicationController
     end
   end
 
+  def toggle
+    @zip_code.update_attributes(favorite: !@zip_code.favorite)
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_zip_code
       @zip_code = ZipCode.find(params[:id])
+      @q = @zip_code.listings.search(params[:q])
+      @listings = @q.result(distinct: true)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
