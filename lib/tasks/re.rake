@@ -38,14 +38,20 @@ namespace :re do
 
   desc "scrapes MLS listings"
   task scrape: :environment do
-    #TruliaScraper.new(ZIP_CODES).run
-    HudHomeStoreScraper.new.run
+    zip_codes = ZipCode.favorite.map(&:code)
+    errors = []
+    errors += UtahShortSaleScraper.new(zip_codes).run
+    #errors += TruliaScraper.new(zip_codes).run
+    #errors += HudHomeStoreScraper.new.run
+    #errors += KslScraper.new(zip_codes).run
+    #errors += CraigslistScraper.new(zip_codes).run
+    #errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/2/st_id/65240626/actor/88501/stg_id/38622201/token/ad79be6a9a589760f1a1821fbcad4183').run
+    puts errors
   end
 
   desc "populates zipcode data"
   task zip: :environment do
-    ZipCode.favorite.each do |code|
-      zip_code = ZipCode.where(code: code).first_or_create
+    ZipCode.all.each do |zip_code|
       Quandl.new(zip_code).run
     end
   end

@@ -4,6 +4,7 @@ class Listing < ActiveRecord::Base
   belongs_to :zip_code
 
   validates :mls_number, uniqueness: true, presence: true
+  validates :zip_code_id, presence: true
 
   scope :visible, -> { where(hide: false) }
   scope :with_cashflow, -> { where.not(avg_rent: nil) }
@@ -38,7 +39,7 @@ class Listing < ActiveRecord::Base
   end
 
   def zip
-    zip_code.code
+    zip_code.try(:code)
   end
 
   def set_loan_amount
@@ -57,7 +58,8 @@ class Listing < ActiveRecord::Base
   end
 
   def set_thrity_year_cash_flow
-    return unless avg_rent.present? and thirty_year_fixed.present?
+    self.avg_rent ||= zip_code.try(:estimated_rent)
+    return unless self.avg_rent.present?
     self.thirty_year_cash_flow = (avg_rent * confidence_rate) - total_thirty_year_monthly_costs
   end
 
@@ -79,6 +81,7 @@ class Listing < ActiveRecord::Base
   end
 
   def set_score
+    return unless zip_code.present?
     cash_score = 2 * (thirty_year_cash_flow || 0)/10
     area_price = ((zip_code.median_listing_price || 0)/10000)/2
     zip_code_score = ZipCode.favorite.map(&:id).include?(zip_code_id) ? 20 : 0

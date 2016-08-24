@@ -30,9 +30,11 @@
         = f.text_field :square_footage_lteq, class: "form-control"
   = f.submit "Search", class: "btn"
 
+= will_paginate @listings
 table.table.table-striped.table-bordered
   thead
     tr
+      th Type
       = content_tag :th, sort_link(@q, :mls_number, 'MLS Number', default_order: :desc)
       = content_tag :th, sort_link(@q, :address, default_order: :desc)
       = content_tag :th, sort_link(@q, :listing_price, default_order: :desc)
@@ -41,11 +43,20 @@ table.table.table-striped.table-bordered
       = content_tag :th, sort_link(@q, :price_per_sq_foot, default_order: :desc)
       = content_tag :th, sort_link(@q, :thirty_year_cash_flow, "30 Year Cash Flow", default_order: :desc)
       = content_tag :th, sort_link(@q, :score, default_order: :desc)
+      th Median/Average Price
       th
   tbody
     - @listings.each do |listing|
       tr
-        td= listing.mls_number
+        td
+          = form_for listing do |f|
+            = f.select :type, options_for_select(['Land', 'SingleFamilyHome', 'MultiFamilyProperty', 'Condo', 'TownHome'], listing.type), prompt: 'Select one'
+            = f.submit
+        td
+          - if listing.url.present?
+            = link_to listing.mls_number, listing.url, target: "_blank", class: 'btn btn-xs btn-success btn-block'
+          - else
+            = listing.mls_number
         td= listing.full_address
         td= number_to_currency listing.listing_price, precision: 0
         td= number_to_currency listing.avg_rent
@@ -68,3 +79,4 @@ table.table.table-striped.table-bordered
             p= link_to 'Edit', edit_listing_path(listing)
           -if can? :destroy, Listing
             p= link_to 'Destroy', listing, method: :delete, confirm: 'Are you sure?'
+= will_paginate @listings

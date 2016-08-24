@@ -1,12 +1,14 @@
 class HudHomeStoreScraper
-  attr_accessor :zip_codes
+  attr_accessor :errors
 
   def initialize
+    @errors = []
   end
 
   def run
     puts 'Scanning and Processing hudhomestore.com ...'
     get_properties
+    errors
   end
 
   def get_properties(page_number = 1)
@@ -37,7 +39,7 @@ class HudHomeStoreScraper
       )
       listing.save if listing.changed?
     rescue => e
-      puts "#{e} for #{property_link}"
+      errors << e
     end
   end
 

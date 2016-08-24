@@ -5,8 +5,8 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @q = Listing.visible.with_cashflow.with_favorite_zipcode.search(params[:q])
-    @listings = @q.result(distinct: true)
+    @q = Listing.visible.with_favorite_zipcode.search(params[:q])
+    @listings = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 30)
   end
 
   # GET /listings/1
@@ -76,6 +76,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:mls_number, :address, :listing_price, :avg_rent, :monthly_payment, :yearly_tax, :insurance, :square_footage, :zip_code, :down_payment, :pmi_requred)
+      params.require(:listing).permit(:mls_number, :address, :listing_price, :avg_rent, :monthly_payment, :yearly_tax, :insurance, :square_footage, :zip_code_id, :down_payment, :pmi_requred, :type)
     end
 end

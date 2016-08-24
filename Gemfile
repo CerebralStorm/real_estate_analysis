@@ -19,6 +19,7 @@ gem 'devise'
 gem 'nokogiri'
 gem 'capybara'
 gem 'poltergeist'
+gem 'will_paginate', github: 'jonatack/will_paginate'
 
 group :test, :development do
   gem 'pry'

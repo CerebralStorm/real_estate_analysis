@@ -10,24 +10,35 @@ class Quandl
   end
 
   def run
-    populate_price_to_rent_ratio
+    return if zip_code.price_to_rent_ratio.present?
+    is_valid = populate_price_to_rent_ratio
+    return unless is_valid
     populate_median_rent
     populate_estimated_rent
-    zip_code.save
+    zip_code.save if zip_code.changed?
   end
 
   def populate_field(indicator_code, attribute)
     return if zip_code.send(attribute).present?
-    response = self.class.get("/datasets/ZILL/Z#{zip_code.code}_#{indicator_code}?apikey=#{api_key}")
+    puts "\nFinding #{attribute} for #{zip_code.code}"
+    response = self.class.get("/datasets/ZILL/Z#{zip_code.code}_#{indicator_code}?api_key=#{api_key}")
+    puts response
+    result = false
     begin
       if response.code == 200
         zip_code.send("#{attribute}=", response['dataset']['data'].first.last)
+        result = true
       end
     rescue => e
-      #noop
-    ensure
-      sleep 30
+      puts e
     end
+    wait
+    result
+  end
+
+  def wait
+    puts 'Sleeping for 30...'
+    sleep 30
   end
 
   def populate_price_to_rent_ratio

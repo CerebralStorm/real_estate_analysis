@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816031248) do
+ActiveRecord::Schema.define(version: 20160824174543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20160816031248) do
     t.integer  "square_footage"
     t.integer  "price_per_sq_foot",                default: 0
     t.integer  "price_for_even_cashflow",          default: 0
-    t.string   "zip_code"
     t.integer  "thirty_year_cash_flow"
     t.integer  "fifteen_year_cash_flow"
     t.float    "confidence_rate",                  default: 0.5
@@ -51,6 +50,8 @@ ActiveRecord::Schema.define(version: 20160816031248) do
     t.integer  "zip_code_id"
     t.integer  "score"
     t.boolean  "hud",                              default: false
+    t.string   "type"
+    t.string   "url"
   end
 
   create_table "rental_calculations", force: :cascade do |t|

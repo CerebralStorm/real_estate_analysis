@@ -9,7 +9,7 @@ class Zillow
   end
 
   def run
-    monthy_payment
+    #monthy_payment
     search_result
     #comp
   end
@@ -63,12 +63,12 @@ class Zillow
         results = response['searchresults']['response']['results']
         results = results.has_key?('result') ? results['result'] : results
         result = results.kind_of?(Array) ? results[0] : results
-        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i rescue listing.avg_rent
+        listing.avg_rent = (result['rentzestimate']['valuationRange']['low']['__content__']).to_i rescue listing.avg_rent || listing.zip_code.try(:estimated_rent)
         listing.zpid = result['zpid']
         listing.city = result['address']['city']
         listing.state = result['address']['state']
       rescue => e
-        #binding.pry
+        #noop
       end
     end
   end
