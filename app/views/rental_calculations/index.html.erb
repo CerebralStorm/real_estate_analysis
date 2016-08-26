@@ -1,0 +1,10 @@
+
+<ul>
+  <% @rental_calculations.each do |rental_calculation| %>
+    <li>
+      <%= link_to rental_calculation.updated_at, rental_calculation_path(rental_calculation) %>
+      <%= link_to 'Delete', rental_calculation_path(rental_calculation), method: :delete %>
+    </li>
+  <% end %>
+  <%= link_to 'New Rental Calculation', new_rental_calculation_path(listing_id: @listing.id) %>
+</ul>

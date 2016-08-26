@@ -21,7 +21,7 @@ class KslScraper
 
   def get_zipcode_properties(zip_code, attempts = 1)
     begin
-      page = Nokogiri::HTML(open("http://www.ksl.com/homes/search/?zip=#{zip_code}&priceFrom=1&priceTo=300000&perPage=96"))
+      page = Nokogiri::HTML(open("http://www.ksl.com/homes/search/?zip=#{zip_code}&priceFrom=1&priceTo=240000&perPage=96"))
       list = page.css('div.listing-group')
       results = list.css('h2.address a').map{ |listing| listing.attributes['href'].text }
       results
@@ -54,6 +54,7 @@ class KslScraper
 
   def scrape_property(property_link, zip_code)
     begin
+      #TODO filter type to remove condos etc.
       page = Nokogiri::HTML(open("http://www.ksl.com#{property_link}"))
       mls_number = get_mls_number(page)
       listing = Listing.where(mls_number: mls_number).first_or_initialize

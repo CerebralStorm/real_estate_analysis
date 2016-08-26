@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824174543) do
+ActiveRecord::Schema.define(version: 20160825230451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20160824174543) do
     t.boolean  "hud",                              default: false
     t.string   "type"
     t.string   "url"
+    t.boolean  "favorite",                         default: false
   end
 
   create_table "rental_calculations", force: :cascade do |t|
@@ -74,8 +75,17 @@ ActiveRecord::Schema.define(version: 20160824174543) do
     t.integer  "appreciation"
     t.integer  "annual_expense_growth"
     t.integer  "sales_expense"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.float    "annual_property_taxes"
+    t.float    "annual_property_value_growth"
+    t.float    "monthly_rent"
+    t.float    "monthly_electricity"
+    t.float    "monthly_water_and_sewer"
+    t.float    "private_mortagage_insurance"
+    t.float    "garbage"
+    t.float    "monthly_hoa"
+    t.float    "other_monthly_costs"
   end
 
   create_table "users", force: :cascade do |t|

@@ -40,12 +40,13 @@ namespace :re do
   task scrape: :environment do
     zip_codes = ZipCode.favorite.map(&:code)
     errors = []
+    errors += ZillowScraper.new(zip_codes).run
     errors += UtahShortSaleScraper.new(zip_codes).run
-    #errors += TruliaScraper.new(zip_codes).run
-    #errors += HudHomeStoreScraper.new.run
-    #errors += KslScraper.new(zip_codes).run
-    #errors += CraigslistScraper.new(zip_codes).run
-    #errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/2/st_id/65240626/actor/88501/stg_id/38622201/token/ad79be6a9a589760f1a1821fbcad4183').run
+    errors += TruliaScraper.new(zip_codes).run
+    errors += HudHomeStoreScraper.new.run
+    errors += KslScraper.new(zip_codes).run
+    errors += CraigslistScraper.new(zip_codes).run
+    #errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/1/st_id/65623182/actor/91620/stg_id/38828172/token/680833').run
     puts errors
   end
 

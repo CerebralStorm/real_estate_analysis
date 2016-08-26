@@ -31,18 +31,28 @@ class UtahRealEstateScraper
     end
   end
 
+  def get_zip_code(row)
+    zip_code = ''
+    (12..16).each do |num|
+      zip_code = row.css('table.prop-overview-full').children[num].text.scan(/\d/).join('')
+      break if zip_code.length == 5
+    end
+    zip_code
+  end
+
   def scrape_property(row)
     begin
       mls_number = row.attributes['id'].text
       listing = Listing.where(mls_number: mls_number).first_or_initialize
-      zip_code = row.css('table.prop-overview-full').children[12].text.scan(/\d/).join('')
-      address = row.css('table.prop-overview-full').children[8].text.gsub('Address:', '').squish
+      zip_code = get_zip_code(row)
+      address = row.css('table.prop-overview-full').children[10].text.gsub('Address:', '').squish
       listing.assign_attributes(
         address: address,
         listing_price: row.css('a.listing-estimate-mortgage').text.scan(/\d/).join(''),
         zip_code: ZipCode.where(code: zip_code).first_or_create
       )
-      listing.save #if listing.changed?
+
+      listing.save if listing.changed?
     rescue => e
       errors << e
     end

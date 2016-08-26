@@ -1,12 +1,12 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
-  before_action :set_listing, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy, :toggle, :favorite]
 
   # GET /listings
   # GET /listings.json
   def index
-    @q = Listing.visible.with_favorite_zipcode.search(params[:q])
-    @listings = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 30)
+    @q = Listing.visible.favorite.with_favorite_zipcode.search(params[:q])
+    @listings = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /listings/1
@@ -68,6 +68,11 @@ class ListingsController < ApplicationController
     redirect_to :back
   end
 
+  def favorite
+    @listing.update_attributes(favorite: true)
+    redirect_to :back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
@@ -76,6 +81,6 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:mls_number, :address, :listing_price, :avg_rent, :monthly_payment, :yearly_tax, :insurance, :square_footage, :zip_code_id, :down_payment, :pmi_requred, :type)
+      params.require(:listing).permit(:mls_number, :address, :listing_price, :avg_rent, :monthly_payment, :yearly_tax, :insurance, :square_footage, :zip_code_id, :down_payment, :pmi_requred, :type, :save)
     end
 end

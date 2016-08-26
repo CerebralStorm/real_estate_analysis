@@ -20,6 +20,7 @@ gem 'nokogiri'
 gem 'capybara'
 gem 'poltergeist'
 gem 'will_paginate', github: 'jonatack/will_paginate'
+gem 'react-rails'
 
 group :test, :development do
   gem 'pry'

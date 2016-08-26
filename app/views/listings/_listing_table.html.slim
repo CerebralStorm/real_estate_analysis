@@ -47,11 +47,12 @@ table.table.table-striped.table-bordered
       th
   tbody
     - @listings.each do |listing|
-      tr
+      tr class=("#{'success' if listing.favorite}")
         td
           = form_for listing do |f|
             = f.select :type, options_for_select(['Land', 'SingleFamilyHome', 'MultiFamilyProperty', 'Condo', 'TownHome'], listing.type), prompt: 'Select one'
             = f.submit
+          = link_to "Rental Calculations", rental_calculations_path(listing_id: listing.id)
         td
           - if listing.url.present?
             = link_to listing.mls_number, listing.url, target: "_blank", class: 'btn btn-xs btn-success btn-block'
@@ -73,6 +74,7 @@ table.table.table-striped.table-bordered
             = number_to_currency listing.zip_code.try(:median_listing_price), precision: 0
         td
           p= link_to 'Hide', toggle_listing_path(listing)
+          p= link_to 'Favorite', favorite_listing_path(listing)
           -if can? :read, Listing
             p= link_to 'View', listing
           -if can? :update, Listing

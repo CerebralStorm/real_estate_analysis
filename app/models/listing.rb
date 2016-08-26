@@ -2,11 +2,13 @@ class Listing < ActiveRecord::Base
   before_save :calculate_computed_fields
 
   belongs_to :zip_code
+  has_many :rental_calculations
 
   validates :mls_number, uniqueness: true, presence: true
   validates :zip_code_id, presence: true
 
   scope :visible, -> { where(hide: false) }
+  scope :favorite, -> { where(favorite: true) }
   scope :with_cashflow, -> { where.not(avg_rent: nil) }
   scope :without_cashflow, -> { where(avg_rent: nil) }
   scope :positive_cashflow, -> { where('thirty_year_cash_flow > 0') }
