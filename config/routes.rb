@@ -1,4 +1,6 @@
 RealEstateAnalysis::Application.routes.draw do
+  get 'pages/index'
+
   resources :zip_codes do
     get :toggle, on: :member
   end

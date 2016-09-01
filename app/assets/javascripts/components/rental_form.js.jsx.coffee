@@ -13,10 +13,9 @@ class @RentalForm extends React.Component
 
         <div className='col-md-4'>
           <Panel header={'Loan Information'}>
-            <FormGroup label={'Loan Amount'} defaultValue={this.props.loan_amount} handleChange={this.props.handleChange} name={'loan_amount'} />
             <FormGroup label={'Loan Duration'} defaultValue={this.props.loan_duration} handleChange={this.props.handleChange} name={'loan_duration'} />
             <FormGroup label={'Interest Rate'} defaultValue={this.props.interest_rate} handleChange={this.props.handleChange} name={'interest_rate'} />
-            <FormGroup label={'Down Payment'} defaultValue={this.props.down_payment} handleChange={this.props.handleChange} name={'down_payment'} />
+            <FormGroup label={'Down Payment Percent'} defaultValue={this.props.down_payment_percent} handleChange={this.props.handleChange} name={'down_payment_percent'} />
           </Panel>
         </div>
 

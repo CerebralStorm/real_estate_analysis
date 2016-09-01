@@ -51,8 +51,11 @@ table.table.table-striped.table-bordered
         td
           = form_for listing do |f|
             = f.select :type, options_for_select(['Land', 'SingleFamilyHome', 'MultiFamilyProperty', 'Condo', 'TownHome'], listing.type), prompt: 'Select one'
-            = f.submit
-          = link_to "Rental Calculations", rental_calculations_path(listing_id: listing.id)
+            br
+            = f.label :notes
+            = f.text_area :notes
+            = f.submit 'Update', class: 'btn btn-xs btn-default'
+          = link_to "Rental Calculations", rental_calculations_path(listing_id: listing.id), class: 'btn btn-xs btn-default'
         td
           - if listing.url.present?
             = link_to listing.mls_number, listing.url, target: "_blank", class: 'btn btn-xs btn-success btn-block'

@@ -29,7 +29,13 @@ class RentalCalculationsController < ApplicationController
       sales_expense: 7,
       annual_property_value_growth: 3,
       annual_expense_growth: 3,
-      annual_property_taxes: 696
+      annual_property_taxes: 1600,
+      monthly_electricity: 80,
+      monthly_water_and_sewer: 30,
+      private_mortagage_insurance: 0,
+      garbage: 10,
+      monthly_hoa: 0,
+      other_monthly_costs: 40,
       )
   end
 

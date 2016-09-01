@@ -5,7 +5,7 @@ class ListingsController < ApplicationController
   # GET /listings
   # GET /listings.json
   def index
-    @q = Listing.visible.favorite.with_favorite_zipcode.search(params[:q])
+    @q = Listing.visible.with_favorite_zipcode.search(params[:q])
     @listings = @q.result(distinct: true).paginate(:page => params[:page], :per_page => 10)
   end
 
@@ -44,7 +44,7 @@ class ListingsController < ApplicationController
   def update
     respond_to do |format|
       if @listing.update(listing_params)
-        format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
+        format.html { redirect_to :back }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -81,6 +81,21 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:mls_number, :address, :listing_price, :avg_rent, :monthly_payment, :yearly_tax, :insurance, :square_footage, :zip_code_id, :down_payment, :pmi_requred, :type, :save)
+      params.require(:listing).permit(
+        :mls_number,
+        :address,
+        :listing_price,
+        :avg_rent,
+        :monthly_payment,
+        :yearly_tax,
+        :insurance,
+        :square_footage,
+        :zip_code_id,
+        :down_payment,
+        :pmi_requred,
+        :type,
+        :favorite,
+        :notes
+      )
     end
 end

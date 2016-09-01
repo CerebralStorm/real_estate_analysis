@@ -44,7 +44,10 @@
     this.cashFlow() * 12
 
   downPayment: ->
-    0.2 * parseFloat(this.state.purchase_price)
+    if this.state.down_payment_percent
+      (parseFloat(this.state.down_payment_percent)/100) * parseFloat(this.state.purchase_price)
+    else
+      0.2 * parseFloat(this.state.purchase_price)
 
   loanAmount: ->
     parseFloat(this.state.purchase_price) - parseFloat(this.downPayment())
