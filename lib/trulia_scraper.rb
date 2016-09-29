@@ -10,7 +10,12 @@ class TruliaScraper
     puts 'Scanning and Processing Trulia.com ...'
     zip_codes.each do |zip_code|
       puts "Processing Zip: #{zip_code}"
-      property_links = get_zipcode_properties(zip_code)
+      property_links = []
+      begin
+        property_links = get_zipcode_properties(zip_code)
+      rescue => e
+        errors << e
+      end
       puts "Found #{property_links.count} properties in #{zip_code}"
       property_links.each do |property_link|
         scrape_property(property_link, zip_code)
@@ -68,7 +73,7 @@ class TruliaScraper
       )
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {property_link: property_link, error: e}
     end
   end
 

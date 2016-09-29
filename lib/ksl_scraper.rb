@@ -67,7 +67,7 @@ class KslScraper
       )
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {property_link: property_link, error: e}
     end
   end
 

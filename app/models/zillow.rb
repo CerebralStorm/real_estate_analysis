@@ -43,7 +43,7 @@ class Zillow
     end
   end
 
-  def search_result_options
+  def search_result_options(listing)
     {
       query: {
         'zws-id' => "X1-ZWz1dudqjorx8r_5rw5j",
@@ -57,9 +57,9 @@ class Zillow
 
   def search_result
     return if listing.avg_rent.present?
-    response = self.class.get("/GetSearchResults.htm", search_result_options)
-    if response.code == 200 && response['searchresults'].has_key?('response')
-      begin
+    begin
+      response = self.class.get("/GetSearchResults.htm", search_result_options)
+      if response.code == 200 && response['searchresults'].has_key?('response')
         results = response['searchresults']['response']['results']
         results = results.has_key?('result') ? results['result'] : results
         result = results.kind_of?(Array) ? results[0] : results
@@ -67,9 +67,9 @@ class Zillow
         listing.zpid = result['zpid']
         listing.city = result['address']['city']
         listing.state = result['address']['state']
-      rescue => e
-        #noop
       end
+    rescue => e
+      #noop
     end
   end
 

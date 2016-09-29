@@ -42,11 +42,14 @@ namespace :re do
     errors = []
     errors += ZillowScraper.new(zip_codes).run
     errors += UtahShortSaleScraper.new(zip_codes).run
-    errors += TruliaScraper.new(zip_codes).run
     errors += HudHomeStoreScraper.new.run
     errors += KslScraper.new(zip_codes).run
     errors += CraigslistScraper.new(zip_codes).run
-    #errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/1/st_id/65623182/actor/91620/stg_id/38828172/token/680833').run
+    errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/1/st_id/65623182/actor/91620/stg_id/38828172/token/680833').run
+    errors += HomesScraper.new('http://www.homes.com/for-sale/salt-lake-city-ut/multi-family/').run
+    errors += HomesScraper.new('http://www.homes.com/for-sale/sandy-ut/multi-family/').run
+    errors += HomesScraper.new('http://www.homes.com/for-sale/washington-county-ut/multi-family/').run
+    errors += HomesScraper.new('http://www.homes.com/for-sale/saint-george-ut/multi-family/').run
     puts errors
   end
 

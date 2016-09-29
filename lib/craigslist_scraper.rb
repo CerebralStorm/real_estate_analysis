@@ -20,8 +20,12 @@ class CraigslistScraper
   end
 
   def get_zipcode_properties(zip_code, set_number = 100)
-    page = Nokogiri::HTML(open("https://saltlakecity.craigslist.org/search/rea?postal=#{zip_code}&min_price=0&max_price=300000"))
-    page.css('a').select{ |a| a.attributes['href'].text.include?('/reb/') }.map{ |a| a.attributes['href'].text }
+    begin
+      page = Nokogiri::HTML(open("https://saltlakecity.craigslist.org/search/rea?postal=#{zip_code}&min_price=0&max_price=300000"))
+      page.css('a').select{ |a| a.attributes['href'].text.include?('/reb/') }.map{ |a| a.attributes['href'].text }
+    rescue => e
+      errors << e
+    end
   end
 
   def scrape_property(property_link, zip_code)
@@ -39,7 +43,7 @@ class CraigslistScraper
       )
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {property_link: property_link, error: e}
     end
   end
 

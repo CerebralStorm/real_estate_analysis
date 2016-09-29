@@ -1,4 +1,5 @@
 RealEstateAnalysis::Application.routes.draw do
+  resources :contacts
   get 'pages/index'
 
   resources :zip_codes do

@@ -25,9 +25,13 @@ class UtahRealEstateScraper
 
   def process_rows(rows)
     rows.each do |row|
-      next unless row.text.strip.present?
-      next if row.css('div')[0].text.include?('You are currently ignoring this property')
-      scrape_property(row)
+      begin
+        next unless row.text.strip.present?
+        next if row.css('div')[0].text.include?('You are currently ignoring this property')
+        scrape_property(row)
+      rescue => e
+        errors << e
+      end
     end
   end
 
@@ -54,7 +58,7 @@ class UtahRealEstateScraper
 
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {row: row, error: e}
     end
   end
 

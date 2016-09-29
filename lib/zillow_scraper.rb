@@ -20,9 +20,13 @@ class ZillowScraper
   end
 
   def get_zipcode_properties(zip_code, page_number = 1)
-    page = Nokogiri::HTML(open("http://www.zillow.com/homes/#{zip_code}_rb/house,townhouse_type/0-240000_price"))
-    list = page.css('ul.photo-cards')
-    list.css('article').map{ |a| "#{a.attributes['id'].text.gsub('zpid_', '')}_zpid" }
+    begin
+      page = Nokogiri::HTML(open("http://www.zillow.com/homes/#{zip_code}_rb/house,townhouse_type/0-240000_price"))
+      list = page.css('ul.photo-cards')
+      list.css('article').map{ |a| "#{a.attributes['id'].text.gsub('zpid_', '')}_zpid" }
+    rescue => e
+      errors << e
+    end
   end
 
   def get_listing_price(page)
@@ -33,7 +37,6 @@ class ZillowScraper
         page.css('div.home-summary-row').css('span')[3].text.scan(/\d/).join('')
       end
     rescue => e
-      errors << e
       ''
     end
   end
@@ -41,18 +44,19 @@ class ZillowScraper
   def scrape_property(property_link, zip_code)
     begin
       page = Nokogiri::HTML(open("http://www.zillow.com/homes/#{property_link}"))
+      return if page.css('div.home-summary-row').text.include?('Off Market') rescue nil
       mls_number = property_link
       listing = Listing.where(mls_number: mls_number).first_or_initialize
       zip_code = ZipCode.where(code: zip_code).first_or_create
       listing.assign_attributes(
         address: page.css('h1.notranslate').text,
         listing_price: get_listing_price(page),
-        zip_code:zip_code,
+        zip_code: zip_code,
         url: "http://www.zillow.com/homes/#{property_link}"
       )
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {property_link: property_link, error: e}
     end
   end
 

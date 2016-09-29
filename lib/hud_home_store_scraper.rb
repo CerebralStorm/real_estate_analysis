@@ -7,7 +7,11 @@ class HudHomeStoreScraper
 
   def run
     puts 'Scanning and Processing hudhomestore.com ...'
-    get_properties
+    begin
+      get_properties
+    rescue => e
+      errors << e
+    end
     errors
   end
 
@@ -39,7 +43,7 @@ class HudHomeStoreScraper
       )
       listing.save if listing.changed?
     rescue => e
-      errors << e
+      errors << {row: row, error: e}
     end
   end
 

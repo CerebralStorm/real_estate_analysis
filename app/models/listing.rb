@@ -28,6 +28,7 @@ class Listing < ActiveRecord::Base
   end
 
   def set_thirty_year_fixed
+    return unless loan_amount.present?
     return if thirty_year_fixed.present?
     term = 12 * 30
     r = (self.thirty_year_fixed_interest_rate || 3.5) / 1200
@@ -45,6 +46,7 @@ class Listing < ActiveRecord::Base
   end
 
   def set_loan_amount
+    return unless listing_price.present?
     self.down_payment = (listing_price.to_f * 0.2).to_i
     self.loan_amount = listing_price - down_payment
   end
