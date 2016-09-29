@@ -1,4 +1,3 @@
-
   <div class="preloader">
     <div class="preloder-wrap">
       <div class="preloder-inner">
@@ -19,7 +18,7 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><h1><%= image_tag 'logo.png', alt: "logo" %></h1></a>
+          <a class="navbar-brand" href="index.html"><h1><%= image_tag 'logo.png', alt: "logo", height: 40, width: 120 %></h1></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -46,7 +45,7 @@
         <li data-target="#main-carousel" data-slide-to="2"></li>
       </ol><!--/.carousel-indicators-->
       <div class="carousel-inner">
-        <div class="item active" style="background-image: url(images/slider/slide3.jpg)">
+        <div class="item active" style="background-image: url(<%= asset_path 'slide3.jpg' %>)">
           <div class="carousel-caption">
             <div>
               <h2 class="heading animated bounceInDown">'Himu' Onepage HTML Template</h2>
@@ -55,14 +54,14 @@
             </div>
           </div>
         </div>
-        <div class="item" style="background-image: url(images/slider/slide2.jpg)">
+        <div class="item" style="background-image: url(<%= asset_path 'slide2.jpg' %>)">
           <div class="carousel-caption"> <div>
             <h2 class="heading animated bounceInDown">Get All in Onepage</h2>
             <p class="animated bounceInUp">Everything is outstanding </p> <a class="btn btn-default slider-btn animated fadeIn" href="#">Get Started</a>
           </div>
         </div>
       </div>
-      <div class="item" style="background-image: url(images/slider/slide1.jpg)">
+      <div class="item" style="background-image: url(<%= asset_path 'slide1.jpg' %>)">
         <div class="carousel-caption">
           <div>
             <h2 class="heading animated bounceInRight">Fully Responsive Template</h2>
@@ -529,7 +528,7 @@
                     <div class="item active">
                       <div class="single-client">
                         <div class="media">
-                          <img class="pull-left" src="images/clients/client1.jpg" alt="">
+                          <%= image_tag "client1.jpg", class: 'pull-left' %>
                           <div class="media-body">
                             <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p><small>Someone famous in Source Title</small><a href="">www.yourwebsite.com</a></blockquote>
                           </div>
@@ -539,7 +538,7 @@
                     <div class="item">
                       <div class="single-client">
                         <div class="media">
-                          <img class="pull-left" src="images/clients/client3.jpg" alt="">
+                          <%= image_tag "client3.jpg", class: 'pull-left' %>
                           <div class="media-body">
                             <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p><small>Someone famous in Source Title</small><a href="">www.yourwebsite.com</a></blockquote>
                           </div>
@@ -549,7 +548,7 @@
                     <div class="item">
                       <div class="single-client">
                         <div class="media">
-                          <img class="pull-left" src="images/clients/client2.jpg" alt="">
+                          <%= image_tag "client2.jpg", class: 'pull-left' %>
                           <div class="media-body">
                             <blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p><small>Someone famous in Source Title</small><a href="">www.yourwebsite.com</a></blockquote>
                           </div>

@@ -87,6 +87,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.7.0)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     httparty (0.14.0)
@@ -241,6 +243,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.2)
   devise
+  font-awesome-rails
   httparty
   jbuilder (~> 2.5)
   jquery-rails

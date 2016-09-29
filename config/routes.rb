@@ -1,6 +1,6 @@
 RealEstateAnalysis::Application.routes.draw do
   resources :contacts
-  get 'pages/index'
+  root 'pages#index'
 
   resources :zip_codes do
     get :toggle, on: :member
@@ -12,5 +12,4 @@ RealEstateAnalysis::Application.routes.draw do
     get :favorite, on: :member
     get :toggle_boolean, on: :member
   end
-  root 'listings#index'
 end

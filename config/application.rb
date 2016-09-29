@@ -27,5 +27,14 @@ module RealEstateAnalysis
     config.logger = Logger.new(STDOUT)
 
     config.autoload_paths << Rails.root.join('lib')
+
+    Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
+      config.assets.paths << path
+    end
+
+    Dir.glob("#{Rails.root}/app/assets/fonts/**/").each do |path|
+      config.assets.paths << path
+    end
+
   end
 end

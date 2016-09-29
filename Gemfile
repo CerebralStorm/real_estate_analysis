@@ -21,6 +21,7 @@ gem 'capybara'
 gem 'poltergeist'
 gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'react-rails'
+gem 'font-awesome-rails'
 
 group :test, :development do
   gem 'pry'
