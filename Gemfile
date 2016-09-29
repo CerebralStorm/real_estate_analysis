@@ -22,6 +22,7 @@ gem 'poltergeist'
 gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'react-rails'
 gem 'font-awesome-rails'
+gem 'rails_12factor', group: :production
 
 group :test, :development do
   gem 'pry'
