@@ -18,7 +18,7 @@
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html"><h1><%= image_tag 'logo.png', alt: "logo", height: 40, width: 240 %></h1></a>
+          <a class="navbar-brand" href="/"><h1><%= image_tag 'logo.png', alt: "logo", height: 40, width: 240 %></h1></a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -26,7 +26,7 @@
             <li class="scroll"><a href="#about-us">About Us</a></li>
             <li class="scroll"><a href="#services">Services</a></li>
             <li class="scroll"><a href="#our-team">Our Team</a></li>
-            <li class="scroll"><a href="#portfolio">Portfolio</a></li>
+            <li class="scroll"><a href="#portfolio">Rentals</a></li>
             <li class="scroll"><a href="#clients">Clients</a></li>
             <li class="scroll"><a href="#blog">Blog</a></li>
             <li class="scroll"><a href="#contact">Contact</a></li>
@@ -172,22 +172,22 @@
             <div class="services row">
               <div class="col-sm-4">
                 <div class="single-service">
-                  <i class="fa fa-th"></i>
-                  <h2>Modern Design</h2>
+                  <i class="fa fa-bolt"></i>
+                  <h2>Quick Closing</h2>
                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="single-service">
-                  <i class="fa fa-html5"></i>
-                  <h2>Web Development</h2>
+                  <i class="fa fa-bank"></i>
+                  <h2>Strong Buying Power</h2>
                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy </p>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="single-service">
                   <i class="fa fa-users"></i>
-                  <h2>Online Marketing</h2>
+                  <h2>Friendly Staff</h2>
                   <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore.</p>
                 </div>
               </div></div>
@@ -342,19 +342,19 @@
       <div class="container">
         <div class="row text-center">
           <div class="col-sm-8 col-sm-offset-2">
-            <h2 class="title-one">Portfolio</h2>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit.</p>
+            <h2 class="title-one">Rentals</h2>
+            <p>Here are some of our properties</p>
           </div>
         </div>
         <ul class="portfolio-filter text-center">
           <li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
-          <li><a class="btn btn-default" href="#" data-filter=".html">Html</a></li>
-          <li><a class="btn btn-default" href="#" data-filter=".wordpress">Wordpress</a></li>
-          <li><a class="btn btn-default" href="#" data-filter=".joomla">Joomla</a></li>
-          <li><a class="btn btn-default" href="#" data-filter=".megento">Megento</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".singlfamily">Single Family Homes</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".condo">Condos</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".townhome">Townhomes</a></li>
+          <li><a class="btn btn-default" href="#" data-filter=".multifamily">Multi-Family</a></li>
         </ul><!--/#portfolio-filter-->
         <div class="portfolio-items">
-          <div class="col-sm-3 col-xs-12 portfolio-item html">
+          <div class="col-sm-3 col-xs-12 portfolio-item singlfamily">
             <div class="view efffect">
               <div class="portfolio-image">
                 <%= image_tag '1.jpg' %></div>
@@ -366,7 +366,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-12 portfolio-item jooma">
+            <div class="col-sm-3 col-xs-12 portfolio-item townhome">
               <div class="view efffect" >
                 <div class="portfolio-image">
                   <%= image_tag '2.jpg' %>
@@ -379,7 +379,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-12 portfolio-item wordpress">
+            <div class="col-sm-3 col-xs-12 portfolio-item condo">
               <div class="view efffect">
                 <div class="portfolio-image">
                   <%= image_tag '3.jpg' %>
@@ -392,7 +392,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-3 col-xs-12 portfolio-item megento">
+          <div class="col-sm-3 col-xs-12 portfolio-item multifamily">
             <div class="view efffect">
               <div class="portfolio-image">
                 <%= image_tag '4.jpg' %>
@@ -405,7 +405,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-3 col-xs-12 portfolio-item html">
+          <div class="col-sm-3 col-xs-12 portfolio-item singlfamily">
             <div class="view efffect">
               <div class="portfolio-image">
                 <%= image_tag '5.jpg' %>
@@ -417,7 +417,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 col-xs-12 portfolio-item wordpress">
+        <div class="col-sm-3 col-xs-12 portfolio-item condo">
           <div class="view efffect">
             <div class="portfolio-image">
               <%= image_tag '6.jpg' %>
@@ -430,7 +430,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 col-xs-12 portfolio-item html">
+        <div class="col-sm-3 col-xs-12 portfolio-item singlfamily">
           <div class="view efffect">
             <div class="portfolio-image">
               <%= image_tag '7.jpg' %>
@@ -443,7 +443,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-3 col-xs-12 portfolio-item joomla">
+        <div class="col-sm-3 col-xs-12 portfolio-item townhome">
           <div class="view efffect">
             <div class="portfolio-image">
               <%= image_tag '8.jpg' %></div>
@@ -468,7 +468,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-3 col-xs-12 portfolio-item wordpress">
+          <div class="col-sm-3 col-xs-12 portfolio-item condo">
             <div class="view efffect">
               <div class="portfolio-image">
                 <%= image_tag '10.jpg' %></div>
@@ -480,7 +480,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-3 col-xs-12 portfolio-item joomla">
+            <div class="col-sm-3 col-xs-12 portfolio-item townhome">
               <div class="view efffect">
                 <div class="portfolio-image">
                   <%= image_tag '11.jpg' %></div>
@@ -492,7 +492,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-3 col-xs-12 portfolio-item megento">
+              <div class="col-sm-3 col-xs-12 portfolio-item multifamily">
                 <div class="view efffect">
                   <div class="portfolio-image">
                     <%= image_tag '12.jpg' %></div>
