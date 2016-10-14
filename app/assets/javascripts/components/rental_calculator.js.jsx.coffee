@@ -127,8 +127,8 @@
                   <tr>
                     <td colSpan="2"><hr /></td>
                   </tr>
-                  <TableRow label={'Total Operating Expense:'} value={this.totalOperatingExpenses()} />
-                  <TableRow label={'Mortagage Expense:'} value={this.monthlyPaymentWithInterest()} />
+                  <TableRow label={'Total Operating Expense:'} addon={'$'} value={this.totalOperatingExpenses()} />
+                  <TableRow label={'Mortagage Expense:'} addon={'$'} value={this.monthlyPaymentWithInterest()} />
                   <tr>
                     <td><strong>Cash Flow:</strong></td>
                     <td><strong>${this.cashFlow().toFixed(2)}</strong></td>

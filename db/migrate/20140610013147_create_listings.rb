@@ -17,7 +17,6 @@ class CreateListings < ActiveRecord::Migration
       t.integer :square_footage
       t.integer :price_per_sq_foot, default: 0
       t.integer :price_for_even_cashflow, default: 0
-      t.string :zip_code
       t.integer :thirty_year_cash_flow
       t.integer :fifteen_year_cash_flow
       t.float :confidence_rate, default: 0.5
