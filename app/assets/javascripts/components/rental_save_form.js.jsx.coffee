@@ -12,7 +12,7 @@ class @RentalSaveForm extends React.Component
       "POST"
 
   render: ->
-    `<form class="new_rental_calculation" id={this.id()} action="/rental_calculations" accept-charset="UTF-8" method={this.action()}>
+    `<form className="new_rental_calculation" id={this.id()} action="/rental_calculations" acceptCharset="UTF-8" method={this.action()}>
       <input type='hidden' name="listing_id" value={this.props.listing_id} />
       <HiddenInput name={"id"} value={this.props.id} />
       <HiddenInput name={"listing_id"} value={this.props.listing_id} />
@@ -42,5 +42,5 @@ class @RentalSaveForm extends React.Component
       <HiddenInput name={"garbage"} value={this.props.garbage} />
       <HiddenInput name={"monthly_hoa"} value={this.props.monthly_hoa} />
       <HiddenInput name={"other_monthly_costs"} value={this.props.other_monthly_costs} />
-      <input type="submit" name="commit" value="Create Rental calculation" data-disable-with="Create Rental calculation" />
+      <input type="submit" name="commit" value={"Create Rental calculation"} data-disable-with="Create Rental calculation" />
     </form>`

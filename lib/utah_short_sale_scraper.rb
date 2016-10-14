@@ -21,7 +21,7 @@ class UtahShortSaleScraper
 
   def get_zipcode_properties(zip_code, page_number = 1)
     begin
-      page = Nokogiri::HTML(open("http://utahshortsale.com/cgi-bin/real?pge=newsearch&state=na&qsearch=true&allcities=&allcounty=Salt+Lake&cityupd=&action=&cord_n=&cord_w=&cord_s=&cord_e=&zoom_lvl=&allzipcodes=84106&allsubdivs=&price_lo=-1&price_hi=225000&htype=ALL&saletype=A&tot_bed_lo=0&tot_bath_lo=0&tot_sqft_lo=0&year=&garage=0&acres_lo=0&style=&high_school=&jr_school=&ele_school=&sortby=price&property_type=1&area=&zipcode=&selZips=#{zip_code}&mlsno=&altqs="))
+      page = Nokogiri::HTML(open("http://utahshortsale.com/cgi-bin/real?pge=newsearch&state=na&qsearch=true&allcities=&allcounty=Salt+Lake&cityupd=&action=&cord_n=&cord_w=&cord_s=&cord_e=&zoom_lvl=&allzipcodes=84106&allsubdivs=&price_lo=-1&price_hi=300000&htype=ALL&saletype=A&tot_bed_lo=0&tot_bath_lo=0&tot_sqft_lo=0&year=&garage=0&acres_lo=0&style=&high_school=&jr_school=&ele_school=&sortby=price&property_type=1&area=&zipcode=&selZips=#{zip_code}&mlsno=&altqs="))
       page.css('a').select{ |a| a.attributes['href'].text.include?('newlisting') }.map{ |a| a.attributes['href'].text }.uniq
     rescue => e
       errors << e

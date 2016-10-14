@@ -21,7 +21,7 @@ class ZillowScraper
 
   def get_zipcode_properties(zip_code, page_number = 1)
     begin
-      page = Nokogiri::HTML(open("http://www.zillow.com/homes/#{zip_code}_rb/house,townhouse_type/0-240000_price"))
+      page = Nokogiri::HTML(open("http://www.zillow.com/homes/#{zip_code}_rb/house,townhouse_type/0-300000_price"))
       list = page.css('ul.photo-cards')
       list.css('article').map{ |a| "#{a.attributes['id'].text.gsub('zpid_', '')}_zpid" }
     rescue => e

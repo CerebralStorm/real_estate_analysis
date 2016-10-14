@@ -15,20 +15,16 @@
         .panel-body
           .form-group
             = f.label :mls_number, class: 'form-label'
-            br
-              = f.text_field :mls_number, class: 'form-control'
+            = f.text_field :mls_number, class: 'form-control'
           .form-group
             = f.label :address, class: 'form-label'
-            br
-              = f.text_field :address, class: 'form-control'
+            = f.text_field :address, class: 'form-control'
           .form-group
             = f.label :zip_code, class: 'form-label'
-            br
-              = f.select :zip_code_id, options_for_select(ZipCode.all.map{ |z| [z.code, z.id] }), {}, { class: 'form-control' }
+            = f.select :zip_code_id, options_for_select(ZipCode.all.map{ |z| [z.code, z.id] }), {}, { class: 'form-control' }
           .form-group
             = f.label :listing_price, class: 'form-label'
-            br
-              = f.text_field :listing_price, class: 'form-control'
+            = f.text_field :listing_price, class: 'form-control'
     .col-md-4
       .panel.panel-info
         .panel-heading
@@ -36,20 +32,16 @@
         .panel-body
           .form-group
             = f.label :down_payment, class: 'form-label'
-            br
-              = f.text_field :down_payment, class: 'form-control'
+            = f.text_field :down_payment, class: 'form-control'
           .form-group
             = f.label :avg_rent, class: 'form-label'
-            br
-              = f.text_field :avg_rent, class: 'form-control'
+            = f.text_field :avg_rent, class: 'form-control'
           .form-group
             = f.label :square_footage, class: 'form-label'
-            br
-              = f.number_field :square_footage, class: 'form-control'
+            = f.number_field :square_footage, class: 'form-control'
           .form-group
             = f.label :confidence_rate, class: 'form-label'
-            br
-              = f.number_field :confidence_rate, class: 'form-control'
+            = f.number_field :confidence_rate, class: 'form-control'
     .col-md-4
       .panel.panel-warning
         .panel-heading
@@ -57,32 +49,25 @@
         .panel-body
           .form-group
             = f.label :city, class: 'form-label'
-            br
-              = f.text_field :city, class: 'form-control'
+            = f.text_field :city, class: 'form-control'
           .form-group
             = f.label :state, class: 'form-label'
-            br
-              = f.text_field :state, class: 'form-control'
+            = f.text_field :state, class: 'form-control'
           .form-group
             = f.label :remodel_cost, class: 'form-label'
-            br
-              = f.number_field :remodel_cost, class: 'form-control'
+            = f.number_field :remodel_cost, class: 'form-control'
           .form-group
             = f.label :number_of_bedrooms, class: 'form-label'
-            br
-              = f.number_field :number_of_bedrooms, class: 'form-control'
+            = f.number_field :number_of_bedrooms, class: 'form-control'
           .form-group
             = f.label :potential_number_of_bedrooms, class: 'form-label'
-            br
-              = f.number_field :potential_number_of_bedrooms, class: 'form-control'
+            = f.number_field :potential_number_of_bedrooms, class: 'form-control'
           .form-group
             = f.label :number_of_bathrooms, class: 'form-label'
-            br
-              = f.number_field :number_of_bathrooms, class: 'form-control'
+            = f.number_field :number_of_bathrooms, class: 'form-control'
           .form-group
             = f.label :potential_number_of_bathrooms, class: 'form-label'
-            br
-              = f.number_field :potential_number_of_bathrooms, class: 'form-control'
+            = f.number_field :potential_number_of_bathrooms, class: 'form-control'
 
   .actions
     = f.submit "Submit", class: "btn"

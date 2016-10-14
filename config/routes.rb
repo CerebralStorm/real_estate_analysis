@@ -1,11 +1,14 @@
 RealEstateAnalysis::Application.routes.draw do
   resources :contacts
-  root 'pages#index'
+  root 'listings#index'
 
   resources :zip_codes do
     get :toggle, on: :member
   end
-  resources :rental_calculations
+  resources :rental_calculations do
+    get :calculator, on: :collection
+  end
+
   devise_for :users
   resources :listings do
     get :toggle, on: :member

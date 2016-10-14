@@ -56,6 +56,8 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootswatch-rails (3.3.5)
+      railties (>= 3.1)
     builder (3.2.2)
     cancancan (1.15.0)
     capybara (2.6.2)
@@ -244,6 +246,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass
+  bootswatch-rails
   cancancan
   capybara
   coffee-rails (~> 4.2)
@@ -269,7 +272,7 @@ DEPENDENCIES
   will_paginate!
 
 RUBY VERSION
-   ruby 2.2.4p230
+   ruby 2.2.5p319
 
 BUNDLED WITH
-   1.12.5
+   1.13.2

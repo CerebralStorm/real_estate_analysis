@@ -17,11 +17,12 @@ class RentalCalculationsController < ApplicationController
       loan_amount: @listing.loan_amount,
       down_payment: @listing.down_payment,
       vacancy: 5,
-      interest_rate: (@listing.thirty_year_fixed_interest_rate || 3.5),
+      interest_rate: (@listing.thirty_year_fixed_interest_rate || 3.7),
       loan_duration: 30,
       capital_expenditures: 5,
-      repair_cost: 5000,
-      closing_cost: 2500,
+      repair_cost: 10000,
+      after_repair_value: @listing.listing_price + 10000,
+      closing_cost: (@listing.loan_amount * 0.03).floor,
       property_management: 10,
       monthly_rent: @listing.avg_rent,
       repairs: 10,
@@ -30,12 +31,12 @@ class RentalCalculationsController < ApplicationController
       annual_property_value_growth: 3,
       annual_expense_growth: 3,
       annual_property_taxes: 1600,
-      monthly_electricity: 80,
-      monthly_water_and_sewer: 30,
+      monthly_electricity: 0,
+      monthly_water_and_sewer: 0,
       private_mortagage_insurance: 0,
-      garbage: 10,
+      garbage: 0,
       monthly_hoa: 0,
-      other_monthly_costs: 40,
+      other_monthly_costs: 0,
       )
   end
 
@@ -77,6 +78,9 @@ class RentalCalculationsController < ApplicationController
       format.html { redirect_to listings_url }
       format.json { head :no_content }
     end
+  end
+
+  def calculator
   end
 
   private

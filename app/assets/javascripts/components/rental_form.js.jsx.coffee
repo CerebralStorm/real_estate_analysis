@@ -15,7 +15,7 @@ class @RentalForm extends React.Component
           <Panel header={'Loan Information'}>
             <FormGroup label={'Loan Duration'} defaultValue={this.props.loan_duration} handleChange={this.props.handleChange} name={'loan_duration'} />
             <FormGroup label={'Interest Rate'} defaultValue={this.props.interest_rate} handleChange={this.props.handleChange} name={'interest_rate'} />
-            <FormGroup label={'Down Payment Percent'} defaultValue={this.props.down_payment_percent} handleChange={this.props.handleChange} name={'down_payment_percent'} />
+            <FormGroup label={'Down Payment Percent'} defaultValue={this.props.down_payment_percent || 20} handleChange={this.props.handleChange} name={'down_payment_percent'} />
           </Panel>
         </div>
 
@@ -23,8 +23,8 @@ class @RentalForm extends React.Component
           <Panel header={'Fees'}>
             <FormGroup label={'Closing Cost'} defaultValue={this.props.closing_cost} handleChange={this.props.handleChange} name={'closing_cost'} />
             <FormGroup label={'Repair Cost'} defaultValue={this.props.repair_cost} handleChange={this.props.handleChange} name={'repair_cost'} />
-            <FormGroup label={'Lender Points'} defaultValue={this.props.lender_points} handleChange={this.props.handleChange} name={'lender_points'} />
-            <FormGroup label={'Other Lender Charges'} defaultValue={this.props.other_lender_charges} handleChange={this.props.handleChange} name={'other_lender_charges'} />
+            <FormGroup label={'Lender Points'} disabled={true} defaultValue={this.props.lender_points} handleChange={this.props.handleChange} name={'lender_points'} />
+            <FormGroup label={'Other Lender Charges'} disabled={true} defaultValue={this.props.other_lender_charges} handleChange={this.props.handleChange} name={'other_lender_charges'} />
           </Panel>
         </div>
       </div>
@@ -52,10 +52,10 @@ class @RentalForm extends React.Component
 
         <div className='col-md-4'>
           <Panel header={'Future Projections'}>
-            <FormGroup label={'Annual Income Growth (%)'} defaultValue={this.props.annual_income_growth} handleChange={this.props.handleChange} name={'annual_income_growth'} />
-            <FormGroup label={'Annual Property Value Growth (%)'} defaultValue={this.props.annual_property_value_growth} handleChange={this.props.handleChange} name={'annual_property_value_growth'} />
-            <FormGroup label={'Annual Expense Growth'} defaultValue={this.props.annual_expense_growth} handleChange={this.props.handleChange} name={'annual_expense_growth'} />
-            <FormGroup label={'Sales Expense'} defaultValue={this.props.sales_expense} handleChange={this.props.handleChange} name={'sales_expense'} />
+            <FormGroup label={'Annual Income Growth (%)'} disabled={true} defaultValue={this.props.annual_income_growth} handleChange={this.props.handleChange} name={'annual_income_growth'} />
+            <FormGroup label={'Annual Property Value Growth (%)'} disabled={true} defaultValue={this.props.annual_property_value_growth} handleChange={this.props.handleChange} name={'annual_property_value_growth'} />
+            <FormGroup label={'Annual Expense Growth'} disabled={true} defaultValue={this.props.annual_expense_growth} handleChange={this.props.handleChange} name={'annual_expense_growth'} />
+            <FormGroup label={'Sales Expense'} disabled={true} defaultValue={this.props.sales_expense} handleChange={this.props.handleChange} name={'sales_expense'} />
           </Panel>
         </div>
       </div>

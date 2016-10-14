@@ -23,6 +23,7 @@ gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'react-rails'
 gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
+gem 'bootswatch-rails'
 
 group :test, :development do
   gem 'pry'

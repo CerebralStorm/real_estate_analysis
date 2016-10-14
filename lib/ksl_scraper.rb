@@ -21,7 +21,7 @@ class KslScraper
 
   def get_zipcode_properties(zip_code, attempts = 1)
     begin
-      page = Nokogiri::HTML(open("http://www.ksl.com/homes/search/?zip=#{zip_code}&priceFrom=1&priceTo=240000&perPage=96"))
+      page = Nokogiri::HTML(open("http://www.ksl.com/homes/search/?zip=#{zip_code}&priceFrom=1&priceTo=300000&perPage=96"))
       list = page.css('div.listing-group')
       results = list.css('h2.address a').map{ |listing| listing.attributes['href'].text }
       results
