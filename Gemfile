@@ -24,6 +24,9 @@ gem 'react-rails'
 gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
 gem 'bootswatch-rails'
+gem 'capybara'
+gem 'selenium-webdriver', '3.0.0.beta4.0'
+gem "chromedriver-helper"
 
 group :test, :development do
   gem 'pry'

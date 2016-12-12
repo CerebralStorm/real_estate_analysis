@@ -45,7 +45,7 @@ namespace :re do
     errors += HudHomeStoreScraper.new.run
     errors += KslScraper.new(zip_codes).run
     errors += CraigslistScraper.new(zip_codes).run
-    errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/report/load/type/2/st_id/67714174/actor/88501/stg_id/39971205').run
+    #errors += UtahRealEstateScraper.new('http://www.utahrealestate.com/1406625').run
     errors += HomesScraper.new('http://www.homes.com/for-sale/salt-lake-city-ut/multi-family/').run
     errors += HomesScraper.new('http://www.homes.com/for-sale/sandy-ut/multi-family/').run
     errors += HomesScraper.new('http://www.homes.com/for-sale/washington-county-ut/multi-family/').run
@@ -57,6 +57,40 @@ namespace :re do
   task zip: :environment do
     ZipCode.all.each do |zip_code|
       Quandl.new(zip_code).run
+    end
+  end
+
+  desc "posts ad to craigs list"
+  task craigslist: :environment do
+    Capybara.register_driver :selenium do |app|
+      Capybara::Selenium::Driver.new(
+        app,
+        browser: :firefox,
+        desired_capabilities: Selenium::WebDriver::Remote::Capabilities.firefox(marionette: false)
+      )
+    end
+    session = Capybara::Session.new(:selenium)
+    session.visit 'http://saltlakecity.craigslist.org/search/hsw'
+    session.click_link 'post'
+    session.choose 'housing wanted'
+    session.choose 'real estate wanted'
+    session.fill_in 'email', with: 'cerebralstorm@gmail.com'
+    session.fill_in 'ConfirmEMail', with: 'cerebralstorm@gmail.com'
+    session.check 'contact_text_ok'
+    session.fill_in 'phone number', with: '801-637-4393'
+    session.fill_in 'contact name', with: 'Cody Tanner'
+    session.fill_in 'posting title', with: 'Looking to buy eastside SLC houses'
+    session.fill_in 'posting body', with:
+    """I am looking to purchase single family and multi family homes in the east bench area of Salt Lake City.
+
+I have financing ready and I am perfectly happy purchasing homes that need a little TLC.
+
+If you are interested in selling your home please text me at 801-637-4393.
+    """
+    session.click_button 'Continue'
+    session.click_button 'done with images'
+    session.within '.draft_warning' do
+        session.click_button 'publish'
     end
   end
 end

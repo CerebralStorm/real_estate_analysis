@@ -56,7 +56,7 @@ table.table.table-striped.table-bordered
             = f.label :notes
             = f.text_area :notes
             = f.submit 'Update', class: 'btn btn-xs btn-default'
-          = link_to "Rental Calculations", rental_calculations_path(listing_id: listing.id), class: 'btn btn-xs btn-default'
+          = link_to "Rental Calculation", new_rental_calculation_path(listing_id: listing.id), class: 'btn btn-xs btn-default'
         td
           - if listing.url.present?
             = link_to listing.mls_number, listing.url, target: "_blank", class: 'btn btn-xs btn-success btn-block'

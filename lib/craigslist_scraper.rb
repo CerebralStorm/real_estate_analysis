@@ -21,7 +21,7 @@ class CraigslistScraper
 
   def get_zipcode_properties(zip_code, set_number = 100)
     begin
-      page = Nokogiri::HTML(open("https://saltlakecity.craigslist.org/search/rea?postal=#{zip_code}&min_price=0&max_price=300000"))
+      page = Nokogiri::HTML(open("https://saltlakecity.craigslist.org/search/rea?postal=#{zip_code}&min_price=0&max_price=310000"))
       page.css('a').select{ |a| a.attributes['href'].text.include?('/reb/') }.map{ |a| a.attributes['href'].text }
     rescue => e
       errors << e

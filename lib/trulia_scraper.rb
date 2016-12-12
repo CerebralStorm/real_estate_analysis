@@ -25,7 +25,7 @@ class TruliaScraper
   end
 
   def get_zipcode_properties(zip_code, page_number = 1)
-    page = Nokogiri::HTML(open("http://www.trulia.com/for_sale/#{zip_code}_zip/0-300000_price/MULTI-FAMILY,SINGLE-FAMILY_HOME,TOWNHOUSE_type/#{page_number}_p"))
+    page = Nokogiri::HTML(open("http://www.trulia.com/for_sale/#{zip_code}_zip/0-310000_price/MULTI-FAMILY,SINGLE-FAMILY_HOME,TOWNHOUSE_type/#{page_number}_p"))
     list = page.css('div#photoView')
     results = page.css("a").select{|link| link['href'].to_s.include?('/property/') and !link['href'].to_s.include?('#map') }.map{ |link| link['href'].to_s }.uniq
     if page.css("a").select{|link| link.text.strip == 'Next' }.present?

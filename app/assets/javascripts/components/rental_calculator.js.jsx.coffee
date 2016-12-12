@@ -16,11 +16,17 @@
     d = 1 - (1 + r)**-term
     n / d
 
+  monthlyPITI: ->
+    @monthlyPaymentWithInterest() + @propertyTaxCost() + @propertyInsurance()
+
   totalCashNeeded: ->
     parseInt(this.downPayment()) + parseInt(this.state.closing_cost) + parseInt(this.state.repair_cost)
 
   monthlyExpenses: ->
     this.totalOperatingExpenses() + this.monthlyPaymentWithInterest()
+
+  propertyInsurance: ->
+    (parseInt(this.state.purchase_price) / 100000) * 40
 
   totalOperatingExpenses: ->
     total = 0
@@ -28,6 +34,7 @@
     total += this.calculatePercentCost('repairs')
     total += this.calculatePercentCost('capital_expenditures')
     total += this.calculatePercentCost('property_management')
+    total += this.propertyInsurance()
     total += this.propertyTaxCost()
     total += parseFloat(this.state.monthly_electricity) unless isNaN(parseFloat(this.state.monthly_electricity))
     total += parseFloat(this.state.monthly_water_and_sewer) unless isNaN(parseFloat(this.state.monthly_water_and_sewer))
@@ -82,6 +89,8 @@
             <div className="col-md-6">
               <table>
                 <tbody>
+                  <TableRow label={'70% Purchase Price:'} prefix={'$'} value={this.state.purchase_price * 0.7} />
+                  <TableRow label={'80% Purchase Price:'} prefix={'$'} value={this.state.purchase_price * 0.8} />
                   <TableRow label={'Purchase Price:'} prefix={'$'} value={this.state.purchase_price} />
                   <TableRow label={'Closing Costs:'} prefix={'$'} value={this.state.closing_cost} />
                   <TableRow label={'Repairs:'} prefix={'$'} value={this.state.repair_cost} />
@@ -97,6 +106,7 @@
                   <TableRow label={'Amoratized Over:'} value={this.state.loan_duration + " Years"} />
                   <TableRow label={'Loan Interest Rate:'} suffix={'%'} value={this.state.interest_rate} />
                   <TableRow label={'Monthly P&I:'} prefix={'$'} value={this.monthlyPaymentWithInterest()} />
+                  <TableRow label={'Monthly PITI:'} prefix={'$'} value={this.monthlyPITI()} />
                   <tr>
                     <td colSpan="2"><hr /></td>
                   </tr>
@@ -119,11 +129,13 @@
                   <TableRow label={'Vacancy:'} prefix={'$'} value={this.calculatePercentCost('vacancy')} />
                   <TableRow label={'Repairs:'} prefix={'$'} value={this.calculatePercentCost('repairs')} />
                   <TableRow label={'Cap Ex:'} prefix={'$'} value={this.calculatePercentCost('capital_expenditures')} />
-                  <TableRow label={'Management:'} value={this.calculatePercentCost('property_management')} />
-                  <TableRow label={'Electricty:'} value={this.state.monthly_electricity} />
-                  <TableRow label={'Water & Sewer:'} value={this.state.monthly_water_and_sewer} />
-                  <TableRow label={'Garbage:'} value={this.state.garbage} />
-                  <TableRow label={'HOA:'} value={this.state.monthly_hoa} />
+                  <TableRow label={'Management:'} prefix={'$'} value={this.calculatePercentCost('property_management')} />
+                  <TableRow label={'Property Tax:'} prefix={'$'} value={this.propertyTaxCost()} />
+                  <TableRow label={'Property Insurance:'} prefix={'$'} value={this.propertyInsurance()} />
+                  <TableRow label={'Electricty:'} prefix={'$'} value={this.state.monthly_electricity} />
+                  <TableRow label={'Water & Sewer:'} prefix={'$'} value={this.state.monthly_water_and_sewer} />
+                  <TableRow label={'Garbage:'} prefix={'$'} value={this.state.garbage} />
+                  <TableRow label={'HOA:'} prefix={'$'} value={this.state.monthly_hoa} />
                   <tr>
                     <td colSpan="2"><hr /></td>
                   </tr>
