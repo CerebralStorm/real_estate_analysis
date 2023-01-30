@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.7.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
@@ -24,7 +24,6 @@ gem 'react-rails'
 gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
 gem 'bootswatch-rails'
-gem 'capybara'
 gem 'selenium-webdriver', '3.0.0.beta4.0'
 gem "chromedriver-helper"
 
