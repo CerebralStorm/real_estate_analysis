@@ -9,7 +9,7 @@ RealEstateAnalysis::Application.routes.draw do
     get :calculator, on: :collection
   end
 
-  devise_for :users
+  # devise_for :users
   resources :listings do
     get :toggle, on: :member
     get :favorite, on: :member
