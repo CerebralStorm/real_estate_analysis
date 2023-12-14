@@ -19,7 +19,7 @@ gem 'devise'
 gem 'nokogiri'
 gem 'capybara'
 gem 'poltergeist'
-gem 'will_paginate', github: 'jonatack/will_paginate'
+# gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'react-rails'
 gem 'font-awesome-rails'
 gem 'rails_12factor', group: :production
